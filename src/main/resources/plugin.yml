@@ -1,0 +1,11 @@
+name: BedWars2023-AdvancedGUI
+version: ${project.version}
+main: com.oxipro.bedWars2023AdvancedGUI.Main
+api-version: '1.21'
+authors: [ OXipro ]
+softdepend:
+  - "HotbarManager"
+commands:
+  bwagui:
+    description: "BedWars2023-AdvancedGUI Main command"
+    usage: "/bwagui"

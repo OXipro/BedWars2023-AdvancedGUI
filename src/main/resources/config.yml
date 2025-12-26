@@ -1,0 +1,32 @@
+bw-categories-menu:
+  menu-rows: 6
+  title: "Select a category"
+  categories:
+    1x8:
+      slot: 10
+      item-material: ""
+      item-amount: 1
+      item-name: ""
+      item-lore:
+        - ""
+        - ""
+      item-glow: true # enhancement glow
+    2x8:
+      slot: 11
+      item-material: ""
+      item-amount: 1
+      item-name: ""
+      item-lore:
+        - ""
+        - ""
+      item-glow: true # enhancement glow
+    armed-2x4:
+      fancy-name: "Armed 2x4"
+      slot: 28
+      item-material: ""
+      item-amount: 1
+      item-name: ""
+      item-lore:
+        - ""
+        - ""
+      item-glow: true # enhancement glow
