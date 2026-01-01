@@ -80,7 +80,7 @@
             <artifactId>BedWars-HotbarManager</artifactId>
             <version>1.6.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/hotbarmanager-plugin-1.6.0.jar</systemPath>
+            <systemPath>${project.basedir}/libs/hotbarmanager-plugin-1.6.0v2.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.kyori</groupId>
