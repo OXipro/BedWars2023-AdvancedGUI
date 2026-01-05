@@ -37,11 +37,11 @@ public class ArenaItem {
             return item;
         }
         final ArenaStatus as = arena.getStatus();
-        String sc = "<red>";
-        if (as == ArenaStatus.WAITING )  { mt = Material.YELLOW_STAINED_GLASS; sc = "<yellow>";}
-        if (as == ArenaStatus.STARTING )  { mt = Material.LIME_STAINED_GLASS; sc = "<green>";}
-        if (as == ArenaStatus.PLAYING )  { mt = Material.LIGHT_BLUE_STAINED_GLASS; sc = "<blue>"; }
-        if (as == ArenaStatus.RESTARTING )  { mt = Material.BLUE_STAINED_GLASS; sc = "<dark_blue>";}
+        String ArenaStatusColor = "<red>";
+        if (as == ArenaStatus.WAITING )  { mt = Material.YELLOW_STAINED_GLASS; ArenaStatusColor = "<yellow>";}
+        if (as == ArenaStatus.STARTING )  { mt = Material.LIME_STAINED_GLASS; ArenaStatusColor = "<green>";}
+        if (as == ArenaStatus.PLAYING )  { mt = Material.LIGHT_BLUE_STAINED_GLASS; ArenaStatusColor = "<blue>"; }
+        if (as == ArenaStatus.RESTARTING )  { mt = Material.BLUE_STAINED_GLASS; ArenaStatusColor = "<dark_blue>";}
 
 
         ll = List.of(
@@ -49,7 +49,7 @@ public class ArenaItem {
                 " <grey>Map:<white> " + arena.getDisplayName(language),
                 " <grey>Category:<white> " + arena.getDisplayGroup(language),
                 " <grey>Online:<white> " + arena.getCurrentPlayers() + "/" + arena.getMaxPlayers(),
-                " <grey>Status: " + sc + arena.getStatus(),
+                " <grey>Status: " + ArenaStatusColor + arena.getStatus(),
                 "",
                 "<b><color:#ffb300>Click to join!</color></b>"
         );

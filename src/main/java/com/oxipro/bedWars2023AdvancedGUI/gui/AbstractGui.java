@@ -11,6 +11,7 @@ public abstract class AbstractGui implements InventoryHolder {
 
     protected final GuiManager guiManager;
     protected final Inventory inventory;
+    protected Player player;
 
     protected AbstractGui(GuiManager guiManager, int rows, String title) {
         this.guiManager = guiManager;
