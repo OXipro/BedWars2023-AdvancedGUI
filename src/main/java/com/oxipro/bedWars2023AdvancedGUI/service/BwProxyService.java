@@ -1,5 +1,6 @@
 package com.oxipro.bedWars2023AdvancedGUI.service;
 
+import com.oxipro.bedWars2023AdvancedGUI.gui.AbstractGui;
 import com.tomkeuper.bedwars.proxy.api.BedWars;
 import com.tomkeuper.bedwars.proxy.api.Language;
 import org.bukkit.entity.Player;
@@ -21,4 +22,6 @@ public class BwProxyService {
     public Language getPlayerLanguage(Player player) {
         return bwproxy.getLanguageUtil().getPlayerLanguage(player);
     }
+
+    public String getMsg(Player player, String inputPath) { return bwproxy.getLanguageUtil().getMsg(player, inputPath); }
 }

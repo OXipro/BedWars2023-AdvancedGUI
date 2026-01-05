@@ -29,9 +29,8 @@ public class BWAGUICommand implements CommandExecutor {
             return true;
         }
 
-        // debug stuff
+// debug stuff
 //        if (Objects.equals(args[0], "refresh")) { guiManager.arenas().ArenaItemStackMapRefresh(); return true; }
-
 
         guiManager.openModeGui(player, guiManager.loadBwCategoryMenu().getCategory(args[0]));
         return true;

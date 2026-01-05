@@ -3,11 +3,13 @@ package com.oxipro.bedWars2023AdvancedGUI.service;
 import com.oxipro.bedWars2023AdvancedGUI.util.ArenaItem;
 import com.tomkeuper.bedwars.proxy.api.*;
 import com.tomkeuper.bedwars.proxy.arenamanager.ArenaManager;
+import org.apache.commons.codec.language.bm.Lang;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ArenaService {
 
@@ -22,7 +24,6 @@ public class ArenaService {
     }
 
     public List<CachedArena> getArenas(boolean onlyJoinable) {
-
         return ArenaManager.getArenas().stream()
                 .filter(arena -> !onlyJoinable ||
                         arena.getStatus() == ArenaStatus.WAITING ||
@@ -30,6 +31,26 @@ public class ArenaService {
 
                 .sorted(Comparator.comparingInt(CachedArena::getCurrentPlayers)
                         .reversed())
+                .toList();
+    }
+
+    public static List<CachedArena> getMapsArena(Language language) {
+        return ArenaManager.getArenas().stream()
+                .filter(arena -> arena.getDisplayName(language) != null)
+                .collect(Collectors.toMap(
+                        arena -> arena.getDisplayName(language),
+                        arena -> arena,
+                        (a1, a2) -> a1
+                ))
+                .entrySet().stream()
+                .sorted(Map.Entry.comparingByKey(String.CASE_INSENSITIVE_ORDER))
+                .map(Map.Entry::getValue)
+                .toList();
+    }
+
+    public static List<CachedArena> getMapsArenaByCategory(Language language, String category) {
+        return getMapsArena(language).stream()
+                .filter(arena -> category.equalsIgnoreCase(arena.getArenaGroup()))
                 .toList();
     }
 
@@ -44,25 +65,5 @@ public class ArenaService {
             arenaItemStackMap.put(arena, item);
         }
         return arenaItemStackMap;
-    }
-
-    public List<String> getMaps(String category) {
-        // BWProxy hook here
-        return List.of(
-                "Airship",
-                "Castle",
-                "Forest",
-                "Desert"
-        );
-    }
-
-    public void quickJoinRandom() {
-    }
-
-    public void quickJoinCategoryRandom(String category) {
-    }
-
-    public void joinSpecificMap(String category, String map) {
-        // BWProxy API join map
     }
 }

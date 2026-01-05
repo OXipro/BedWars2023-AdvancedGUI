@@ -3,13 +3,15 @@ package com.oxipro.bedWars2023AdvancedGUI;
 import com.oxipro.bedWars2023AdvancedGUI.command.BWAGUICommand;
 import com.oxipro.bedWars2023AdvancedGUI.config.ConfigurationManager;
 import com.oxipro.bedWars2023AdvancedGUI.gui.GuiManager;
+import com.oxipro.bedWars2023AdvancedGUI.language.LanguageManager;
 import com.oxipro.bedWars2023AdvancedGUI.listener.InventoryClickListener;
 import com.oxipro.bedWars2023AdvancedGUI.service.*;
 import com.tomkeuper.bedwars.proxy.BedWarsProxy;
 import com.tomkeuper.bedwars.proxy.api.BedWars;
 import com.tomkeuper.bedwars.proxy.api.CachedArena;
-import me.kiiya.hotbarmanager.HotbarManager;
+import me.kiiya.hotbarmanager.*;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -61,6 +63,13 @@ public final class Main extends JavaPlugin {
         CategoryService categoryService = new CategoryService(this);
         PlayerResumeService resumeService = new PlayerResumeService(this, bwproxy);
         HotbarManagerService hbmService = new HotbarManagerService(this, hbm);
+        LanguageManager languageManager = new LanguageManager(bwProxyService);
+
+        languageManager.load();
+
+        if (configManager.getConfig().getBoolean("force-legacy-material-load-at-enable")) {
+            //noinspection removal
+            Material mt = Material.LEGACY_IRON_DOOR_BLOCK; }
 
         GuiManager guiManager = new GuiManager(
                 this,
@@ -69,7 +78,8 @@ public final class Main extends JavaPlugin {
                 resumeService,
                 configManager,
                 bwProxyService,
-                hbmService
+                hbmService,
+                languageManager
         );
 
         getCommand("bwagui").setExecutor(new BWAGUICommand(guiManager));

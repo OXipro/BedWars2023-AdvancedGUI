@@ -46,7 +46,7 @@ public class ConfigurationManager {
             );
             config.setDefaults(defConfig);
             config.options().copyDefaults(true);
-            save();
+            //save();
         }
     }
 

@@ -33,6 +33,11 @@ public class ItemBuilder {
         return this;
     }
 
+    public ItemBuilder name(Component name) {
+        meta.displayName(name.decoration(TextDecoration.ITALIC, false));
+        return this;
+    }
+
     public ItemBuilder lore(List<String> lore) {
         if (!lore.isEmpty()) {
             List<Component> loreComponents = new ArrayList<>();
@@ -43,6 +48,19 @@ public class ItemBuilder {
         }
         return this;
     }
+
+    public ItemBuilder loreCMP(List<Component> lore) {
+        if (!lore.isEmpty()) {
+            List<Component> loreComponents = new ArrayList<>();
+            for (Component line : lore) {
+                loreComponents.add(line.decoration(TextDecoration.ITALIC, false));
+            }
+            meta.lore(loreComponents);
+        }
+        return this;
+    }
+
+
     public ItemBuilder glow(boolean glow) {
         if (glow) {
             meta.addEnchant(Enchantment.THORNS, 1, true);

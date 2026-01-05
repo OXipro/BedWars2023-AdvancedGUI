@@ -4,9 +4,11 @@ import com.oxipro.bedWars2023AdvancedGUI.config.ConfigurationManager;
 import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategory;
 import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategoryMenu;
 import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategoryMenuLoader;
+import com.oxipro.bedWars2023AdvancedGUI.language.LanguageManager;
 import com.oxipro.bedWars2023AdvancedGUI.service.*;
 import com.tomkeuper.bedwars.proxy.api.BedWars;
 import me.kiiya.hotbarmanager.api.HotbarManager;
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,6 +26,7 @@ public class GuiManager {
     private final BwCategoryMenu bwCategoryMenu;
     private final BwProxyService bwProxyService;
     private final HotbarManagerService hbms;
+    private final LanguageManager languageManager;
 
 
     private final Map<Player, AbstractGui> openGuis = new HashMap<>();
@@ -35,7 +38,8 @@ public class GuiManager {
             PlayerResumeService resumeService,
             ConfigurationManager configurationManager,
             BwProxyService bwProxyService,
-            HotbarManagerService hbms
+            HotbarManagerService hbms,
+            LanguageManager languageManager
     ) {
         this.plugin = plugin;
         this.arenaService = arenaService;
@@ -45,6 +49,7 @@ public class GuiManager {
         this.bwProxyService = bwProxyService;
         this.resumeService = resumeService;
         this.hbms = hbms;
+        this.languageManager = languageManager;
 
     }
 
@@ -62,6 +67,7 @@ public class GuiManager {
 
     private void openGui(Player player, AbstractGui gui) {
         openGuis.put(player, gui);
+        gui.player = player;
         player.openInventory(gui.getInventory());
     }
 
@@ -90,6 +96,11 @@ public class GuiManager {
     }
 
     public BwProxyService getBwProxyService() {return bwProxyService; }
+
+    public Component getMMMsg(Player player, String path) {return languageManager.getMMMsg(player, path); }
+
+    public String getRawMsg(Player player, String path) {return languageManager.getRawMsg(player, path); }
+
 
     public BwCategoryMenu loadBwCategoryMenu() {
         return bwCategoryMenu;
