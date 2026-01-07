@@ -14,10 +14,6 @@ public class CategoryService {
         this.plugin = plugin;
     }
 
-    public void openHotbarManager() {
-        // Hook HotbarManager (Kiiya)
-    }
-
     public void openQuickBuyEditor() {
         // Hook QuickBuy editor
     }

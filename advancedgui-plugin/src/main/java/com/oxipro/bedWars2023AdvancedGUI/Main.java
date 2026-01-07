@@ -1,5 +1,6 @@
 package com.oxipro.bedWars2023AdvancedGUI;
 
+import com.oxipro.bedWars2023AdvancedGUI.api.API;
 import com.oxipro.bedWars2023AdvancedGUI.command.BWAGUICommand;
 import com.oxipro.bedWars2023AdvancedGUI.config.ConfigurationManager;
 import com.oxipro.bedWars2023AdvancedGUI.gui.GuiManager;
@@ -8,14 +9,12 @@ import com.oxipro.bedWars2023AdvancedGUI.listener.InventoryClickListener;
 import com.oxipro.bedWars2023AdvancedGUI.service.*;
 import com.tomkeuper.bedwars.proxy.BedWarsProxy;
 import com.tomkeuper.bedwars.proxy.api.BedWars;
-import com.tomkeuper.bedwars.proxy.api.CachedArena;
 import me.kiiya.hotbarmanager.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
 
 
 public final class Main extends JavaPlugin {
@@ -87,10 +86,17 @@ public final class Main extends JavaPlugin {
                 new InventoryClickListener(guiManager),
                 this
         );
+
+        getServer().getServicesManager().register(
+                com.oxipro.bedWars2023AdvancedGUI.api.API.class,
+                new com.oxipro.bedWars2023AdvancedGUI.API(this, guiManager),
+                this,
+                ServicePriority.Normal
+        );
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        getServer().getServicesManager().unregisterAll(this);
     }
 }
