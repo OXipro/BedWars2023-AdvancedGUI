@@ -1,14 +1,15 @@
 package com.oxipro.bedWars2023AdvancedGUI;
 
-import com.oxipro.bedWars2023AdvancedGUI.api.API;
 import com.oxipro.bedWars2023AdvancedGUI.command.BWAGUICommand;
 import com.oxipro.bedWars2023AdvancedGUI.config.ConfigurationManager;
 import com.oxipro.bedWars2023AdvancedGUI.gui.GuiManager;
 import com.oxipro.bedWars2023AdvancedGUI.language.LanguageManager;
 import com.oxipro.bedWars2023AdvancedGUI.listener.InventoryClickListener;
+import com.oxipro.bedWars2023AdvancedGUI.listener.InventoryCloseListener;
 import com.oxipro.bedWars2023AdvancedGUI.service.*;
 import com.tomkeuper.bedwars.proxy.BedWarsProxy;
 import com.tomkeuper.bedwars.proxy.api.BedWars;
+import com.tomkeuper.bedwars.proxy.libs.bukkit.Metrics;
 import me.kiiya.hotbarmanager.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -87,12 +88,19 @@ public final class Main extends JavaPlugin {
                 this
         );
 
+        getServer().getPluginManager().registerEvents(
+                new InventoryCloseListener(guiManager),
+                this
+        );
+
         getServer().getServicesManager().register(
                 com.oxipro.bedWars2023AdvancedGUI.api.API.class,
                 new com.oxipro.bedWars2023AdvancedGUI.API(this, guiManager),
                 this,
                 ServicePriority.Normal
         );
+
+        new Metrics(this, 28757);
     }
 
     @Override

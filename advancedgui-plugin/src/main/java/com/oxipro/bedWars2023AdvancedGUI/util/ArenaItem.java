@@ -3,7 +3,6 @@ package com.oxipro.bedWars2023AdvancedGUI.util;
 import com.tomkeuper.bedwars.proxy.api.ArenaStatus;
 import com.tomkeuper.bedwars.proxy.api.CachedArena;
 import com.tomkeuper.bedwars.proxy.api.Language;
-import com.tomkeuper.bedwars.proxy.arenamanager.ArenaManager;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 

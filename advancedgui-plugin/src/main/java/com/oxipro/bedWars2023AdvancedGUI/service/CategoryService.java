@@ -1,10 +1,7 @@
 package com.oxipro.bedWars2023AdvancedGUI.service;
 
-import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.List;
-import java.util.Map;
 
 public class CategoryService {
 

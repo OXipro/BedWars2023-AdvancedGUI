@@ -1,6 +1,5 @@
 package com.oxipro.bedWars2023AdvancedGUI.service;
 
-import com.oxipro.bedWars2023AdvancedGUI.gui.AbstractGui;
 import com.tomkeuper.bedwars.proxy.api.BedWars;
 import com.tomkeuper.bedwars.proxy.api.Language;
 import org.bukkit.entity.Player;

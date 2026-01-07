@@ -1,9 +1,7 @@
 package com.oxipro.bedWars2023AdvancedGUI.gui;
 
-import com.oxipro.bedWars2023AdvancedGUI.config.ConfigurationManager;
 import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategory;
 import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategoryMenu;
-import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategoryMenuLoader;
 import com.oxipro.bedWars2023AdvancedGUI.util.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -12,7 +10,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.Map;
 
 public class CategoryGui extends AbstractGui {
 

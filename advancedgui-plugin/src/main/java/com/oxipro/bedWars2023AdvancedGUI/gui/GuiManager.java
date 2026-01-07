@@ -6,10 +6,10 @@ import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategoryMenu;
 import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategoryMenuLoader;
 import com.oxipro.bedWars2023AdvancedGUI.language.LanguageManager;
 import com.oxipro.bedWars2023AdvancedGUI.service.*;
-import com.tomkeuper.bedwars.proxy.api.BedWars;
-import me.kiiya.hotbarmanager.api.HotbarManager;
+
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
@@ -107,6 +107,9 @@ public class GuiManager {
     }
 
     public Logger getLogger() { return plugin.getLogger(); }
+
+    public Plugin getPlugin() { return plugin; }
+
 
     public HotbarManagerService getHBMService() { return hbms; }
 }

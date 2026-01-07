@@ -1,13 +1,11 @@
 package com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory;
 
-import net.kyori.adventure.text.Component;
-
 import java.util.List;
 
 public class BwCategory {
 
-    private final String key;          // ex: "1x8", "armed-2x4"
-    private final String fancyName;    // optionnel
+    private final String key;
+    private final String fancyName;
     private final int slot;
     private final String itemMaterial;
     private final int amount;

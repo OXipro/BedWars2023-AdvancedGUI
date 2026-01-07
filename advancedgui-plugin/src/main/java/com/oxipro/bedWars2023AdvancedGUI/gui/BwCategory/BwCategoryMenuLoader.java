@@ -1,7 +1,5 @@
 package com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory;
 
-import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategory;
-import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategoryMenu;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 

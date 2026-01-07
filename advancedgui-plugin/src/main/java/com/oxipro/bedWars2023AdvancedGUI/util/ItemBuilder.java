@@ -1,20 +1,25 @@
 package com.oxipro.bedWars2023AdvancedGUI.util;
 
+import com.destroystokyo.paper.profile.ProfileProperty;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.profile.PlayerProfile;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.UUID;
 
 public class ItemBuilder {
 
@@ -22,11 +27,36 @@ public class ItemBuilder {
     private final ItemMeta meta;
     private final MiniMessage mm;
 
+    public static boolean isBase64(String base64) {
+        try {
+            Base64.getDecoder().decode(base64);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
+
     public ItemBuilder(Material material) {
         this.item = new ItemStack(material);
         this.meta = item.getItemMeta();
         this.mm = MiniMessage.miniMessage();
     }
+
+    public ItemBuilder(String material) {
+        Material realMaterial = Material.BARRIER;
+        if (Material.valueOf(material) == null) {
+            if (isBase64(material)) {
+                realMaterial = Material.PLAYER_HEAD;
+            }
+        } else {
+            realMaterial = Material.valueOf(material);
+        }
+        this.item = new ItemStack(realMaterial);
+        item.toString().split("name=textures, value=")[1].split(", signature=")[0].equals(material);
+        this.meta = item.getItemMeta();
+        this.mm = MiniMessage.miniMessage();
+    }
+
 
     public ItemBuilder name(String name) {
         meta.displayName(mm.deserialize(name).decoration(TextDecoration.ITALIC, false));

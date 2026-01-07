@@ -5,19 +5,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
-import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.*;
-import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.ITEM_CATEGORIES_LORE;
-import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.ITEM_CATEGORIES_NAME;
-import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.ITEM_HBM_LORE;
-import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.ITEM_HBM_NAME;
-import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.ITEM_QB_LORE;
-import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.ITEM_QB_NAME;
-import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.ITEM_QUICKJOIN_LORE;
-import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.ITEM_QUICKJOIN_NAME;
-import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.NO_MAP_AVAILAIBLE_CATEGORY;
-import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.REJOIN_UNAVAILABLE_LORE;
+import static com.oxipro.bedWars2023AdvancedGUI.config.ConfigPaths.*;
 
 public class ConfigDefault {
 
@@ -33,7 +22,35 @@ public class ConfigDefault {
         file = new File(Bukkit.getPluginManager().getPlugin("BWProxy2023").getDataFolder().getPath() + "/Addons/AdvancedGUI/", "config.yml");
         c = YamlConfiguration.loadConfiguration(file);
 
-        c.addDefault(REJOIN_AVAILABLE_NAME, "<green>Rejoin Game");
+        c.addDefault(GUI_MAIN_ARENAS_REFRESH_DELAY, 40L);
+        c.addDefault(GUI_MAIN_ARENAS_REFRESH_ENABLED, true);
+        c.addDefault(GUI_MAIN_ARENAS_START_SLOT, 12);
+        c.addDefault(GUI_MAIN_ARENAS_SLOTS_COUNTS, 5);
+        c.addDefault(GUI_MAIN_ARENAS_MATERIAL_WAITING, "YELLOW_STAINED_GLASS");
+        c.addDefault(GUI_MAIN_ARENAS_MATERIAL_STARTING, "LIME_STAINED_GLASS");
+        c.addDefault(GUI_MAIN_ARENAS_MATERIAL_PLAYING, "LIGHT_BLUE_STAINED_GLASS");
+        c.addDefault(GUI_MAIN_ARENAS_MATERIAL_RESTARTING, "BLUE_STAINED_GLASS");
+
+        c.addDefault(GUI_MAIN_REJOIN_ENABLED, true);
+        c.addDefault(GUI_MAIN_REJOIN_SLOT, 35);
+        c.addDefault(GUI_MAIN_REJOIN_MATERIAL_AVAILABLE, "ENDER_PEARL");
+        c.addDefault(GUI_MAIN_REJOIN_MATERIAL_UNAVAILABLE, "BARRIER");
+
+        c.addDefault(GUI_MAIN_QUICK_JOIN_ENABLED, true);
+        c.addDefault(GUI_MAIN_QUICK_JOIN_SLOT, 10);
+        c.addDefault(GUI_MAIN_QUICK_JOIN_MATERIAL, "NETHER_STAR");
+
+        c.addDefault(GUI_MAIN_CATEGORIES_ENABLED, true);
+        c.addDefault(GUI_MAIN_CATEGORIES_SLOT, 27);
+        c.addDefault(GUI_MAIN_CATEGORIES_MATERIAL, "CHEST");
+
+        c.addDefault(GUI_MAIN_HOTBAR_ENABLED, true);
+        c.addDefault(GUI_MAIN_HOTBAR_SLOT, 28);
+        c.addDefault(GUI_MAIN_HOTBAR_MATERIAL, "BLAZE_ROD");
+
+        c.addDefault(GUI_MAIN_QUICK_BUY_ENABLED, false);
+        c.addDefault(GUI_MAIN_QUICK_BUY_SLOT, 29);
+        c.addDefault(GUI_MAIN_QUICK_BUY_MATERIAL, "EMERALD");
 
 
         c.options().copyDefaults(true);

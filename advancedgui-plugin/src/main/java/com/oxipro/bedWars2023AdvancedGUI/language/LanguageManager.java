@@ -2,7 +2,6 @@ package com.oxipro.bedWars2023AdvancedGUI.language;
 
 import com.oxipro.bedWars2023AdvancedGUI.language.LanguageDefault.*;
 import com.oxipro.bedWars2023AdvancedGUI.service.BwProxyService;
-import com.tomkeuper.bedwars.proxy.api.BedWars;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;

@@ -54,43 +54,4 @@
             </resource>
         </resources>
     </build>
-
-<!--    <repositories>-->
-<!--        <repository>-->
-<!--            <id>papermc</id>-->
-<!--            <url>https://repo.papermc.io/repository/maven-public/</url>-->
-<!--        </repository>-->
-<!--        <repository>-->
-<!--            <id>bedwars2023-releases</id>-->
-<!--            <url>https://repo.tomkeuper.com/repository/releases/</url>-->
-<!--        </repository>-->
-<!--    </repositories>-->
-
-<!--    <dependencies>-->
-<!--        <dependency>-->
-<!--            <groupId>io.papermc.paper</groupId>-->
-<!--            <artifactId>paper-api</artifactId>-->
-<!--            <version>1.21.8-R0.1-SNAPSHOT</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.tomkeuper.bedwars</groupId>-->
-<!--            <artifactId>BWProxy2023</artifactId>-->
-<!--            <version>1.0</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/libs/proxy-plugin-1.0.jar</systemPath>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>me.kiiya</groupId>-->
-<!--            <artifactId>BedWars-HotbarManager</artifactId>-->
-<!--            <version>1.6.0</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/libs/hotbarmanager-plugin-1.6.0v2.jar</systemPath>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>net.kyori</groupId>-->
-<!--            <artifactId>adventure-text-minimessage</artifactId>-->
-<!--            <version>4.24.0</version>-->
-<!--        </dependency>-->
-<!--    </dependencies>-->
 </project>
