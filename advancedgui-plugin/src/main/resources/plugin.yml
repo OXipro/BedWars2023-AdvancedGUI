@@ -5,6 +5,7 @@ api-version: '1.21'
 authors: [ OXipro ]
 softdepend:
   - "HotbarManager"
+  - "PlaceholderAPI"
 commands:
   bwagui:
     description: "BedWars2023-AdvancedGUI Main command"

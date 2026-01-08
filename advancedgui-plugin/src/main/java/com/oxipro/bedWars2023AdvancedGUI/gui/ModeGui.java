@@ -12,7 +12,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import java.util.List;
 
 import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.*;
-import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.REJOIN_AVAILABLE_LORE;
 
 public class ModeGui extends AbstractGui {
 
@@ -64,13 +63,13 @@ public class ModeGui extends AbstractGui {
         List<String> lore;
         RemoteReJoin rj = guiManager.resume().getReJoin(player);
         if (rj == null) {
-            rjg = guiManager.getMMMsg(player, REJOIN_UNAVAILABLE_NAME);
+            rjg = guiManager.getMMMsg(player, GUI_REJOIN_UNAVAILABLE_NAME);
             mt = Material.BARRIER;
-            lore = List.of(guiManager.getBwProxyService().getMsg(player, REJOIN_UNAVAILABLE_LORE));
+            lore = List.of(guiManager.getBwProxyService().getMsg(player, GUI_REJOIN_UNAVAILABLE_LORE));
         } else {
-            rjg = guiManager.getMMMsg(player, REJOIN_AVAILABLE_NAME);
+            rjg = guiManager.getMMMsg(player, GUI_REJOIN_AVAILABLE_NAME);
             mt = Material.ENDER_PEARL;
-            lore = List.of(guiManager.getBwProxyService().getMsg(player, REJOIN_AVAILABLE_LORE));
+            lore = List.of(guiManager.getBwProxyService().getMsg(player, GUI_REJOIN_AVAILABLE_LORE));
             lore.replaceAll(s -> s.replace("{arena_display_name}", rj.getArena().getDisplayName(guiManager.getBwProxyService().getPlayerLanguage(player))));
         }
         inventory.setItem(35,
@@ -96,7 +95,7 @@ public class ModeGui extends AbstractGui {
             List<CachedArena> cachedarenas = guiManager.arenas().getMapsArenaByCategory(guiManager.getBwProxyService().getPlayerLanguage(player), category.getKey());
             if (cachedarenas != null && !cachedarenas.isEmpty()) {
                 guiManager.openMapSelectorGui(player, category);
-            } else {player.sendMessage(guiManager.getMMMsg(player, NO_MAP_AVAILAIBLE_CATEGORY));}
+            } else {player.sendMessage(guiManager.getMMMsg(player, MESSAGES_NO_MAP_AVAILABLE_CATEGORY));}
         }
 
         if (slot == 27) {

@@ -8,7 +8,6 @@ import com.tomkeuper.bedwars.proxy.api.RemoteReJoin;
 import com.tomkeuper.bedwars.proxy.arenamanager.ArenaManager;
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import net.kyori.adventure.text.Component;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -103,13 +102,13 @@ public class MainGui extends AbstractGui {
             String mt;
             List<String> lore;
             if (rj == null) {
-                rjg = guiManager.getMMMsg(player, REJOIN_UNAVAILABLE_NAME);
+                rjg = guiManager.getMMMsg(player, GUI_REJOIN_UNAVAILABLE_NAME);
                 mt = config.getString(GUI_MAIN_REJOIN_MATERIAL_UNAVAILABLE);
-                lore = List.of(guiManager.getBwProxyService().getMsg(player, REJOIN_UNAVAILABLE_LORE));
+                lore = List.of(guiManager.getBwProxyService().getMsg(player, GUI_REJOIN_UNAVAILABLE_LORE));
             } else {
-                rjg = guiManager.getMMMsg(player, REJOIN_AVAILABLE_NAME);
+                rjg = guiManager.getMMMsg(player, GUI_REJOIN_AVAILABLE_NAME);
                 mt = config.getString(GUI_MAIN_REJOIN_MATERIAL_AVAILABLE);
-                lore = List.of(guiManager.getBwProxyService().getMsg(player, REJOIN_AVAILABLE_LORE));
+                lore = List.of(guiManager.getBwProxyService().getMsg(player, GUI_REJOIN_AVAILABLE_LORE));
                 lore.replaceAll(s -> s.replace("{arena_display_name}", rj.getArena().getDisplayName(guiManager.getBwProxyService().getPlayerLanguage(player))));
             }
 
@@ -124,8 +123,8 @@ public class MainGui extends AbstractGui {
         if (config.getBoolean(GUI_MAIN_QUICK_JOIN_ENABLED)) {
             inventory.setItem(config.getInt(GUI_MAIN_QUICK_JOIN_SLOT),
                     new ItemBuilder(config.getString(GUI_MAIN_QUICK_JOIN_MATERIAL))
-                            .name(guiManager.getMMMsg(player, ITEM_QUICKJOIN_NAME))
-                            .loreCMP(List.of(guiManager.getMMMsg(player, ITEM_QUICKJOIN_LORE)))
+                            .name(guiManager.getMMMsg(player, GUI_QUICK_JOIN_NAME))
+                            .loreCMP(List.of(guiManager.getMMMsg(player, GUI_QUICK_JOIN_LORE)))
                             .build()
             );
         }
@@ -133,8 +132,8 @@ public class MainGui extends AbstractGui {
         if (config.getBoolean(GUI_MAIN_CATEGORIES_ENABLED)) {
             inventory.setItem(config.getInt(GUI_MAIN_CATEGORIES_SLOT),
                     new ItemBuilder(config.getString(GUI_MAIN_CATEGORIES_MATERIAL))
-                            .name(guiManager.getMMMsg(player, ITEM_CATEGORIES_NAME))
-                            .loreCMP(List.of(guiManager.getMMMsg(player, ITEM_CATEGORIES_LORE)))
+                            .name(guiManager.getMMMsg(player, GUI_CATEGORIES_NAME))
+                            .loreCMP(List.of(guiManager.getMMMsg(player, GUI_CATEGORIES_LORE)))
                             .build()
             );
         }
@@ -142,8 +141,8 @@ public class MainGui extends AbstractGui {
         if (config.getBoolean(GUI_MAIN_HOTBAR_ENABLED)) {
             inventory.setItem(config.getInt(GUI_MAIN_HOTBAR_SLOT),
                     new ItemBuilder(config.getString(GUI_MAIN_HOTBAR_MATERIAL))
-                            .name(guiManager.getMMMsg(player, ITEM_HBM_NAME))
-                            .loreCMP(List.of(guiManager.getMMMsg(player, ITEM_HBM_LORE)))
+                            .name(guiManager.getMMMsg(player, GUI_HBM_NAME))
+                            .loreCMP(List.of(guiManager.getMMMsg(player, GUI_HBM_LORE)))
                             .build()
             );
         }
@@ -151,8 +150,8 @@ public class MainGui extends AbstractGui {
         if (config.getBoolean(GUI_MAIN_QUICK_BUY_ENABLED)) {
             inventory.setItem(config.getInt(GUI_MAIN_QUICK_BUY_SLOT),
                     new ItemBuilder(config.getString(GUI_MAIN_QUICK_BUY_MATERIAL))
-                            .name(guiManager.getMMMsg(player, ITEM_QB_NAME))
-                            .loreCMP(List.of(guiManager.getMMMsg(player, ITEM_QB_LORE)))
+                            .name(guiManager.getMMMsg(player, GUI_QUICK_BUY_NAME))
+                            .loreCMP(List.of(guiManager.getMMMsg(player, GUI_QUICK_BUY_LORE)))
                             .build()
             );
         }

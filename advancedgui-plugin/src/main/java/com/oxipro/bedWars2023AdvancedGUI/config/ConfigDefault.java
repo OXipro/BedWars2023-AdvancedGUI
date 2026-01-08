@@ -26,10 +26,17 @@ public class ConfigDefault {
         c.addDefault(GUI_MAIN_ARENAS_REFRESH_ENABLED, true);
         c.addDefault(GUI_MAIN_ARENAS_START_SLOT, 12);
         c.addDefault(GUI_MAIN_ARENAS_SLOTS_COUNTS, 5);
+        c.addDefault(GUI_MAIN_ARENAS_SHOW_FULL, false);
+        c.addDefault(GUI_MAIN_ARENAS_SHOW_WAITING, true);
+        c.addDefault(GUI_MAIN_ARENAS_SHOW_STARTING, true);
+        c.addDefault(GUI_MAIN_ARENAS_SHOW_RESTARTING, false);
+        c.addDefault(GUI_MAIN_ARENAS_SHOW_PLAYING, false);
         c.addDefault(GUI_MAIN_ARENAS_MATERIAL_WAITING, "YELLOW_STAINED_GLASS");
         c.addDefault(GUI_MAIN_ARENAS_MATERIAL_STARTING, "LIME_STAINED_GLASS");
         c.addDefault(GUI_MAIN_ARENAS_MATERIAL_PLAYING, "LIGHT_BLUE_STAINED_GLASS");
         c.addDefault(GUI_MAIN_ARENAS_MATERIAL_RESTARTING, "BLUE_STAINED_GLASS");
+        c.addDefault(GUI_MAIN_ARENAS_MATERIAL_NO_ARENA, "BARRIER");
+
 
         c.addDefault(GUI_MAIN_REJOIN_ENABLED, true);
         c.addDefault(GUI_MAIN_REJOIN_SLOT, 35);

@@ -1,6 +1,7 @@
 package com.oxipro.bedWars2023AdvancedGUI.util;
 
 import com.destroystokyo.paper.profile.ProfileProperty;
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -8,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -26,6 +28,7 @@ public class ItemBuilder {
     private final ItemStack item;
     private final ItemMeta meta;
     private final MiniMessage mm;
+    private Player player;
 
     public static boolean isBase64(String base64) {
         try {
@@ -57,9 +60,13 @@ public class ItemBuilder {
         this.mm = MiniMessage.miniMessage();
     }
 
+    public ItemBuilder player(Player player) {
+        this.player = player;
+        return this;
+    }
 
     public ItemBuilder name(String name) {
-        meta.displayName(mm.deserialize(name).decoration(TextDecoration.ITALIC, false));
+        meta.displayName(mm.deserialize(PlaceholderAPI.setPlaceholders(player , name)).decoration(TextDecoration.ITALIC, false));
         return this;
     }
 
@@ -72,7 +79,7 @@ public class ItemBuilder {
         if (!lore.isEmpty()) {
             List<Component> loreComponents = new ArrayList<>();
             for (String line : lore) {
-                loreComponents.add(mm.deserialize(line).decoration(TextDecoration.ITALIC, false));
+                loreComponents.add(mm.deserialize(PlaceholderAPI.setPlaceholders(player , line)).decoration(TextDecoration.ITALIC, false));
             }
             meta.lore(loreComponents);
         }

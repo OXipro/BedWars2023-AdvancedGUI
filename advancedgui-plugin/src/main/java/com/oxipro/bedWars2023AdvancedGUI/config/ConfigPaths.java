@@ -10,10 +10,18 @@ public class ConfigPaths {
     public static final String GUI_MAIN_ARENAS_REFRESH_ENABLED = GUI_MAIN_ARENAS + "refresh.enabled";
     public static final String GUI_MAIN_ARENAS_START_SLOT = GUI_MAIN_ARENAS + "start-slot";
     public static final String GUI_MAIN_ARENAS_SLOTS_COUNTS = GUI_MAIN_ARENAS + "slots-count";
+    public static final String GUI_MAIN_ARENAS_SHOW = GUI_MAIN_ARENAS + "show.";
+    public static final String GUI_MAIN_ARENAS_SHOW_FULL = GUI_MAIN_ARENAS_SHOW + "full";
+    public static final String GUI_MAIN_ARENAS_SHOW_WAITING = GUI_MAIN_ARENAS_SHOW + "waiting";
+    public static final String GUI_MAIN_ARENAS_SHOW_STARTING = GUI_MAIN_ARENAS_SHOW + "starting";
+    public static final String GUI_MAIN_ARENAS_SHOW_RESTARTING = GUI_MAIN_ARENAS_SHOW + "restarting";
+    public static final String GUI_MAIN_ARENAS_SHOW_PLAYING = GUI_MAIN_ARENAS_SHOW + "playing";
     public static final String GUI_MAIN_ARENAS_MATERIAL_WAITING = GUI_MAIN_ARENAS + "material-waiting";
     public static final String GUI_MAIN_ARENAS_MATERIAL_STARTING = GUI_MAIN_ARENAS + "material-starting";
     public static final String GUI_MAIN_ARENAS_MATERIAL_PLAYING = GUI_MAIN_ARENAS + "material-playing";
     public static final String GUI_MAIN_ARENAS_MATERIAL_RESTARTING = GUI_MAIN_ARENAS + "material-restarting";
+    public static final String GUI_MAIN_ARENAS_MATERIAL_NO_ARENA = GUI_MAIN_ARENAS + "material-no-arena";
+
 
 
     public static final String GUI_MAIN_REJOIN = GUI_MAIN + "rejoin.";

@@ -67,6 +67,10 @@
           <id>bedwars2023-releases</id>
           <url>https://repo.tomkeuper.com/repository/releases/</url>
       </repository>
+      <repository>
+          <id>placeholderapi</id>
+          <url>https://repo.extendedclip.com/releases/</url>
+      </repository>
   </repositories>
 
     <dependencies>
@@ -105,6 +109,12 @@
             <artifactId>bstats-bukkit</artifactId>
             <version>3.1.0</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.11.6</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

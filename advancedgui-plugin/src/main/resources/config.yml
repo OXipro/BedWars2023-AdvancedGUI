@@ -13,10 +13,17 @@ gui:
       start-slot: 12
       slots-count: 5
       # theses can be heads
+      show:
+        full: false
+        waiting: true
+        starting: true
+        restarting: false
+        playing: false
       material-waiting: "YELLOW_STAINED_GLASS"
       material-starting: "LIME_STAINED_GLASS"
       material-playing: "LIGHT_BLUE_STAINED_GLASS"
       material-restarting: "BLUE_STAINED_GLASS"
+      material-no-arena: "BARRIER"
     rejoin:
       enabled: true
       slot: 35
