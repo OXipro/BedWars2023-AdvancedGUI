@@ -4,21 +4,27 @@ import com.tomkeuper.bedwars.proxy.api.ArenaStatus;
 import com.tomkeuper.bedwars.proxy.api.CachedArena;
 import com.tomkeuper.bedwars.proxy.api.Language;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
+import static com.oxipro.bedWars2023AdvancedGUI.config.ConfigPaths.*;
+
 public class ArenaItem {
     private Language language;
     private CachedArena arena;
-    public ArenaItem(CachedArena arena, Language language) {
+    private FileConfiguration fileConfiguration;
+
+    public ArenaItem(CachedArena arena, Language language, FileConfiguration configuration) {
         this.arena = arena;
         this.language = language;
+        this.fileConfiguration = configuration;
     }
 
     public ItemStack createArenaItem() {
 
-        Material mt = Material.RED_STAINED_GLASS;
+        String mt = "RED_STAINED_GLASS";
         List<String> ll;
 
         int amount = arena != null ? Math.max(1, arena.getCurrentPlayers()) : 1;
@@ -37,10 +43,10 @@ public class ArenaItem {
         }
         final ArenaStatus as = arena.getStatus();
         String ArenaStatusColor = "<red>";
-        if (as == ArenaStatus.WAITING )  { mt = Material.YELLOW_STAINED_GLASS; ArenaStatusColor = "<yellow>";}
-        if (as == ArenaStatus.STARTING )  { mt = Material.LIME_STAINED_GLASS; ArenaStatusColor = "<green>";}
-        if (as == ArenaStatus.PLAYING )  { mt = Material.LIGHT_BLUE_STAINED_GLASS; ArenaStatusColor = "<blue>"; }
-        if (as == ArenaStatus.RESTARTING )  { mt = Material.BLUE_STAINED_GLASS; ArenaStatusColor = "<dark_blue>";}
+        if (as == ArenaStatus.WAITING )  { mt = fileConfiguration.getString(GUI_MAIN_ARENAS_MATERIAL_WAITING); ArenaStatusColor = "<yellow>";}
+        if (as == ArenaStatus.STARTING )  { mt = fileConfiguration.getString(GUI_MAIN_ARENAS_MATERIAL_STARTING); ArenaStatusColor = "<green>";}
+        if (as == ArenaStatus.PLAYING )  { mt = fileConfiguration.getString(GUI_MAIN_ARENAS_MATERIAL_PLAYING); ArenaStatusColor = "<blue>"; }
+        if (as == ArenaStatus.RESTARTING )  { mt = fileConfiguration.getString(GUI_MAIN_ARENAS_MATERIAL_RESTARTING); ArenaStatusColor = "<dark_blue>";}
 
 
         ll = List.of(

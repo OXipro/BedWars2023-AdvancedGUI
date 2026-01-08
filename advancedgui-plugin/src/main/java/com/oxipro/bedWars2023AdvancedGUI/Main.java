@@ -59,7 +59,7 @@ public final class Main extends JavaPlugin {
 
         BwProxyService bwProxyService = new BwProxyService(this, bwproxy);
         ConfigurationManager configManager = new ConfigurationManager(this);
-        ArenaService arenaService = new ArenaService(this, bwProxyService);
+        ArenaService arenaService = new ArenaService(this, bwProxyService, configManager.getConfig());
         CategoryService categoryService = new CategoryService(this);
         PlayerResumeService resumeService = new PlayerResumeService(this, bwproxy);
         HotbarManagerService hbmService = new HotbarManagerService(this, hbm);

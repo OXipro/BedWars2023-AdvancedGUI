@@ -57,7 +57,7 @@ public class MainGui extends AbstractGui {
             if (index < items.size()) {
                 inventory.setItem(slot, items.get(index));
             } else {
-                inventory.setItem(slot, new ArenaItem(null, language).createArenaItem());
+                inventory.setItem(slot, new ArenaItem(null, language, config).createArenaItem());
             }
         }
     }
