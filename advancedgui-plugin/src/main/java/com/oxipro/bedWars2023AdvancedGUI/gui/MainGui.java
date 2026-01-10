@@ -90,15 +90,16 @@ public class MainGui extends AbstractGui {
 //            );
             inventory.setItem(config.getInt(GUI_MAIN_REJOIN_SLOT),
                     new RejoinItem(config, guiManager.getBwProxyService(), guiManager.getLanguageManager(), player)
-                            .createRejoinItem(rj)
+                            .rejoin(rj)
+                            .build()
             );
         }
 
         if (config.getBoolean(GUI_MAIN_QUICK_JOIN_ENABLED)) {
             inventory.setItem(config.getInt(GUI_MAIN_QUICK_JOIN_SLOT),
                     new ItemBuilder(config.getString(GUI_MAIN_QUICK_JOIN_MATERIAL))
-                            .name(guiManager.getMMMsg(player, GUI_QUICK_JOIN_NAME))
-                            .loreCMP(List.of(guiManager.getMMMsg(player, GUI_QUICK_JOIN_LORE)))
+                            .name(guiManager.getRawMsg(player, GUI_QUICK_JOIN_NAME))
+                            .lore(guiManager.getRawMsgList(player, GUI_QUICK_JOIN_LORE))
                             .build()
             );
         }
@@ -106,8 +107,8 @@ public class MainGui extends AbstractGui {
         if (config.getBoolean(GUI_MAIN_CATEGORIES_ENABLED)) {
             inventory.setItem(config.getInt(GUI_MAIN_CATEGORIES_SLOT),
                     new ItemBuilder(config.getString(GUI_MAIN_CATEGORIES_MATERIAL))
-                            .name(guiManager.getMMMsg(player, GUI_CATEGORIES_NAME))
-                            .loreCMP(List.of(guiManager.getMMMsg(player, GUI_CATEGORIES_LORE)))
+                            .name(guiManager.getRawMsg(player, GUI_CATEGORIES_NAME))
+                            .lore(guiManager.getRawMsgList(player, GUI_CATEGORIES_LORE))
                             .build()
             );
         }
@@ -115,8 +116,8 @@ public class MainGui extends AbstractGui {
         if (config.getBoolean(GUI_MAIN_HOTBAR_ENABLED)) {
             inventory.setItem(config.getInt(GUI_MAIN_HOTBAR_SLOT),
                     new ItemBuilder(config.getString(GUI_MAIN_HOTBAR_MATERIAL))
-                            .name(guiManager.getMMMsg(player, GUI_HBM_NAME))
-                            .loreCMP(List.of(guiManager.getMMMsg(player, GUI_HBM_LORE)))
+                            .name(guiManager.getRawMsg(player, GUI_HBM_NAME))
+                            .lore(guiManager.getRawMsgList(player, GUI_HBM_LORE))
                             .build()
             );
         }
@@ -124,8 +125,8 @@ public class MainGui extends AbstractGui {
         if (config.getBoolean(GUI_MAIN_QUICK_BUY_ENABLED)) {
             inventory.setItem(config.getInt(GUI_MAIN_QUICK_BUY_SLOT),
                     new ItemBuilder(config.getString(GUI_MAIN_QUICK_BUY_MATERIAL))
-                            .name(guiManager.getMMMsg(player, GUI_QUICK_BUY_NAME))
-                            .loreCMP(List.of(guiManager.getMMMsg(player, GUI_QUICK_BUY_LORE)))
+                            .name(guiManager.getRawMsg(player, GUI_QUICK_BUY_NAME))
+                            .lore(guiManager.getRawMsgList(player, GUI_QUICK_BUY_LORE))
                             .build()
             );
         }

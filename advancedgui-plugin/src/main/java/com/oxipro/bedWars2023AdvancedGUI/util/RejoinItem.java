@@ -7,6 +7,7 @@ import com.tomkeuper.bedwars.proxy.api.CachedArena;
 import com.tomkeuper.bedwars.proxy.api.Language;
 import com.tomkeuper.bedwars.proxy.api.RemoteReJoin;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -14,10 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 import static com.oxipro.bedWars2023AdvancedGUI.config.ConfigPaths.*;
-import static com.oxipro.bedWars2023AdvancedGUI.config.ConfigPaths.GUI_MAIN_ARENAS_MATERIAL_PLAYING;
-import static com.oxipro.bedWars2023AdvancedGUI.config.ConfigPaths.GUI_MAIN_ARENAS_MATERIAL_RESTARTING;
 import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.*;
-import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.GUI_ARENAS_RESTARTING_LORE;
 
 public class RejoinItem {
     private Language language;
@@ -28,6 +26,11 @@ public class RejoinItem {
     private LanguageManager languageManager;
     private Player player;
 
+    private String mt;
+    private String rjg;
+    private List<String> lore;
+
+
 
     public RejoinItem(FileConfiguration configuration, BwProxyService bwProxyService, LanguageManager languageManager, Player player) {
         this.config = configuration;
@@ -37,11 +40,7 @@ public class RejoinItem {
         this.language = bwProxyService.getPlayerLanguage(player);
     }
 
-    public ItemStack createRejoinItem(RemoteReJoin rj) {
-
-        String rjg;
-            String mt;
-            List<String> lore;
+    public RejoinItem rejoin(RemoteReJoin rj) {
             if (rj == null) {
                 mt = config.getString(GUI_MAIN_REJOIN_MATERIAL_UNAVAILABLE);
                 rjg = languageManager.getRawMsg(player, GUI_REJOIN_UNAVAILABLE_NAME);
@@ -53,10 +52,13 @@ public class RejoinItem {
                 rjg = bwPlaceholders.replaceArenaPlaceholders(languageManager.getRawMsg(player, GUI_REJOIN_AVAILABLE_NAME));
                 lore = bwPlaceholders.replaceArenaPlaceholders(languageManager.getRawMsgList(player, GUI_REJOIN_AVAILABLE_LORE));
             }
+            return this;
+    }
 
-            return new ItemBuilder(mt)
-                            .name(rjg)
-                            .lore(lore)
-                            .build();
+    public ItemStack build() {
+        return new ItemBuilder(mt)
+                .name(rjg)
+                .lore(lore)
+                .build();
     }
 }
