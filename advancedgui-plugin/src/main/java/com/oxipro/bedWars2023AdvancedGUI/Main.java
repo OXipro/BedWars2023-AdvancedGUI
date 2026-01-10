@@ -18,7 +18,7 @@ import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
-public final class Main extends JavaPlugin {
+public final class   Main extends JavaPlugin {
 
     private BedWars bwproxy = null;
     private me.kiiya.hotbarmanager.api.HotbarManager hbm = null;
@@ -59,11 +59,11 @@ public final class Main extends JavaPlugin {
 
         BwProxyService bwProxyService = new BwProxyService(this, bwproxy);
         ConfigurationManager configManager = new ConfigurationManager(this);
-        ArenaService arenaService = new ArenaService(this, bwProxyService, configManager.getConfig());
+        LanguageManager languageManager = new LanguageManager(bwProxyService);
+        ArenaService arenaService = new ArenaService(this, bwProxyService, configManager.getConfig(), languageManager);
         CategoryService categoryService = new CategoryService(this);
         PlayerResumeService resumeService = new PlayerResumeService(this, bwproxy);
         HotbarManagerService hbmService = new HotbarManagerService(this, hbm);
-        LanguageManager languageManager = new LanguageManager(bwProxyService);
 
         languageManager.load();
 

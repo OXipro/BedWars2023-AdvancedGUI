@@ -3,20 +3,20 @@ addons:
     gui:
       quick-arenas:
         default: # mandatory
-          name: "<aqua>Arena: {arena_short_identifier}" # can use {arena_identifier}
+          name: "<aqua>Arena: %bw_arena_short_identifier%" # can use %arena_identifier%
           lore:
           - ""
-          - " <grey>Map:<white> {arena_display_name}"
-          - " <grey>Category:<white> {arena_group}"
-          - " <grey>Online:<white> {arena_players}/{arena_max_players}"
-          - " <grey>Status: {arena_status}"
+          - " <grey>Map:<white> %bw_arena_display_name%"
+          - " <grey>Category:<white> %bw_arena_group%"
+          - " <grey>Online:<white> %bw_arena_players%/%bw_arena_max_players%"
+          - " <grey>Status: %bw_arena_status%"
           - ""
           - "<b><color:#ffb300>Click to join!</color></b>"
         waiting: [] # if set to [] will set default
         starting: []  # if set to [] will set default
         playing: [] # if set to [] will set default
         restarting: # if set to [] will set default
-          name: "<aqua>Restarting: {arena_short_identifier}" # can use {arena_identifier}
+          name: "<aqua>Restarting: %bw_arena_short_identifier%" # can use %bw_arena_identifier%
           lore:
           - ""
           - " <blue>this arena is restarting you can't join it"
@@ -33,7 +33,7 @@ addons:
           name: <green>Rejoin Game
           lore:
           - <green>Rejoin Game
-          - "<yellow>Map: {arena_display_name}"
+          - "<yellow>Map: %bw_arena_display_name%"
         unavailable:
           name: <red>No game to rejoin
           lore:

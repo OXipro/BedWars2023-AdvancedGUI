@@ -10,18 +10,14 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.profile.PlayerProfile;
 
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.util.UUID;
 
 public class ItemBuilder {
 
@@ -29,6 +25,7 @@ public class ItemBuilder {
     private final ItemMeta meta;
     private final MiniMessage mm;
     private Player player;
+    private Boolean head = false;
 
     public static boolean isBase64(String base64) {
         try {
@@ -50,12 +47,13 @@ public class ItemBuilder {
         if (Material.valueOf(material) == null) {
             if (isBase64(material)) {
                 realMaterial = Material.PLAYER_HEAD;
+                head = true;
             }
         } else {
             realMaterial = Material.valueOf(material);
         }
         this.item = new ItemStack(realMaterial);
-        item.toString().split("name=textures, value=")[1].split(", signature=")[0].equals(material);
+        if (head) {item.toString().split("name=textures, value=")[1].split(", signature=")[0].equals(material);}
         this.meta = item.getItemMeta();
         this.mm = MiniMessage.miniMessage();
     }

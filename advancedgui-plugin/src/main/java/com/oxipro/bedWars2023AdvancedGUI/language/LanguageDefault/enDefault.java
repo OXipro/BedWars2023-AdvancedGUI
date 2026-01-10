@@ -24,13 +24,13 @@ public class enDefault {
         file = new File(Bukkit.getPluginManager().getPlugin("BWProxy2023").getDataFolder().getPath() + "/Languages/", "messages_en.yml");
         c = YamlConfiguration.loadConfiguration(file);
 
-        c.addDefault(GUI_ARENAS_DEFAULT_NAME, "<aqua>Arena: {arena_short_identifier}");
+        c.addDefault(GUI_ARENAS_DEFAULT_NAME, "<aqua>Arena: %arena_short_identifier%");
         c.addDefault(GUI_ARENAS_DEFAULT_LORE, List.of(
                 "",
-                " <grey>Map:<white> {arena_display_name}",
-                " <grey>Category:<white> {arena_group}",
-                " <grey>Online:<white> {arena_players}/{arena_max_players}",
-                " <grey>Status: {arena_status}",
+                " <grey>Map:<white> %arena_display_name%",
+                " <grey>Category:<white> %arena_group%",
+                " <grey>Online:<white> %arena_players%/%arena_max_players%",
+                " <grey>Status: %arena_status%",
                 "",
                 "<b><color:#ffb300>Click to join!</color></b>"
         ));
@@ -41,7 +41,7 @@ public class enDefault {
 
         c.addDefault(GUI_ARENAS_PLAYING, Collections.emptyList());
 
-        c.addDefault(GUI_ARENAS_RESTARTING_NAME, "<aqua>Restarting: {arena_short_identifier}");
+        c.addDefault(GUI_ARENAS_RESTARTING_NAME, "<aqua>Restarting: %arena_short_identifier%");
         c.addDefault(GUI_ARENAS_RESTARTING_LORE, List.of(
                 "",
                 " <blue>this arena is restarting you can't join it",
@@ -64,7 +64,7 @@ public class enDefault {
         c.addDefault(GUI_REJOIN_AVAILABLE_NAME, "<green>Rejoin Game");
         c.addDefault(GUI_REJOIN_AVAILABLE_LORE, List.of(
                 "<green>Rejoin Game",
-                "<yellow>Map: {arena_display_name}"
+                "<yellow>Map: %arena_display_name%"
         ));
 
         c.addDefault(GUI_REJOIN_UNAVAILABLE_NAME, "<red>No game to rejoin");

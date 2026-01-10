@@ -13,6 +13,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -101,6 +102,9 @@ public class GuiManager {
 
     public String getRawMsg(Player player, String path) {return languageManager.getRawMsg(player, path); }
 
+    public List<String> getRawMsgList(Player player, String path) {return languageManager.getRawMsgList(player, path); }
+
+    public LanguageManager getLanguageManager() {return languageManager; }
 
     public BwCategoryMenu loadBwCategoryMenu() {
         return bwCategoryMenu;

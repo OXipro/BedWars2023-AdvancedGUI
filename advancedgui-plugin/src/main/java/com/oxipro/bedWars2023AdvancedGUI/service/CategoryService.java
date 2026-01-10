@@ -12,6 +12,6 @@ public class CategoryService {
     }
 
     public void openQuickBuyEditor() {
-        // Hook QuickBuy editor
+        // addon paid bro
     }
 }

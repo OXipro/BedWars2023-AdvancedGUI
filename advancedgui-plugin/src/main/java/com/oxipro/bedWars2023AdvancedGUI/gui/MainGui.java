@@ -1,7 +1,9 @@
 package com.oxipro.bedWars2023AdvancedGUI.gui;
 
+import com.oxipro.bedWars2023AdvancedGUI.service.BwProxyService;
 import com.oxipro.bedWars2023AdvancedGUI.util.ArenaItem;
 import com.oxipro.bedWars2023AdvancedGUI.util.ItemBuilder;
+import com.oxipro.bedWars2023AdvancedGUI.util.RejoinItem;
 import com.tomkeuper.bedwars.proxy.api.CachedArena;
 import com.tomkeuper.bedwars.proxy.api.Language;
 import com.tomkeuper.bedwars.proxy.api.RemoteReJoin;
@@ -56,67 +58,39 @@ public class MainGui extends AbstractGui {
             if (index < items.size()) {
                 inventory.setItem(slot, items.get(index));
             } else {
-                inventory.setItem(slot, new ArenaItem(null, language, config).createArenaItem());
+                inventory.setItem(slot, new ArenaItem(null, config, guiManager.getBwProxyService(), guiManager.getLanguageManager(), player).createArenaItem());
             }
         }
     }
 
     @Override
     protected void draw() {
-
-
-
-//        guiManager.arenas().getTopArenas().forEach((slot, material) ->
-//                inventory.setItem(slot, new ItemBuilder(material).build())
-//        );
-
-
-        //        guiManager.getLogger().info("1");
-        //        guiManager.getLogger().info("2 " + items);
-
-//        guiManager.arenas().ArenaItemStackMapRefresh(player);
-//        List<ItemStack> items = new ArrayList<>(
-//                guiManager.arenas().getArenaItemStackMap().values()
-//        );
-//        int startSlot = 12;
-//        int offset = 0;
-//
-//        for (int i = 0; i < 5; i++) {
-//
-//            int index = offset + i;
-//            int slot = startSlot + i;
-//
-//            if (index < items.size()) {
-//                inventory.setItem(slot, items.get(index));
-//               guiManager.getLogger().info("3 " + items.get(index));
-//            } else {
-//                inventory.setItem(slot, new ArenaItem(null, language).createArenaItem());
-//            }
-//        }
-
-
         drawArenas();
 
         if (config.getBoolean(GUI_MAIN_REJOIN_ENABLED)) {
-            Component rjg;
-            String mt;
-            List<String> lore;
-            if (rj == null) {
-                rjg = guiManager.getMMMsg(player, GUI_REJOIN_UNAVAILABLE_NAME);
-                mt = config.getString(GUI_MAIN_REJOIN_MATERIAL_UNAVAILABLE);
-                lore = List.of(guiManager.getBwProxyService().getMsg(player, GUI_REJOIN_UNAVAILABLE_LORE));
-            } else {
-                rjg = guiManager.getMMMsg(player, GUI_REJOIN_AVAILABLE_NAME);
-                mt = config.getString(GUI_MAIN_REJOIN_MATERIAL_AVAILABLE);
-                lore = List.of(guiManager.getBwProxyService().getMsg(player, GUI_REJOIN_AVAILABLE_LORE));
-                lore.replaceAll(s -> s.replace("{arena_display_name}", rj.getArena().getDisplayName(guiManager.getBwProxyService().getPlayerLanguage(player))));
-            }
-
+//            Component rjg;
+//            String mt;
+//            List<String> lore;
+//            if (rj == null) {
+//                rjg = guiManager.getMMMsg(player, GUI_REJOIN_UNAVAILABLE_NAME);
+//                mt = config.getString(GUI_MAIN_REJOIN_MATERIAL_UNAVAILABLE);
+//                lore = List.of(guiManager.getBwProxyService().getMsg(player, GUI_REJOIN_UNAVAILABLE_LORE));
+//            } else {
+//                rjg = guiManager.getMMMsg(player, GUI_REJOIN_AVAILABLE_NAME);
+//                mt = config.getString(GUI_MAIN_REJOIN_MATERIAL_AVAILABLE);
+//                lore = List.of(guiManager.getBwProxyService().getMsg(player, GUI_REJOIN_AVAILABLE_LORE));
+//                lore.replaceAll(s -> s.replace("{arena_display_name}", rj.getArena().getDisplayName(guiManager.getBwProxyService().getPlayerLanguage(player))));
+//            }
+//
+//            inventory.setItem(config.getInt(GUI_MAIN_REJOIN_SLOT),
+//                    new ItemBuilder(mt)
+//                            .name(rjg)
+//                            .lore(lore)
+//                            .build()
+//            );
             inventory.setItem(config.getInt(GUI_MAIN_REJOIN_SLOT),
-                    new ItemBuilder(mt)
-                            .name(rjg)
-                            .lore(lore)
-                            .build()
+                    new RejoinItem(config, guiManager.getBwProxyService(), guiManager.getLanguageManager(), player)
+                            .createRejoinItem(rj)
             );
         }
 
@@ -250,6 +224,5 @@ public class MainGui extends AbstractGui {
     @Override
     public void onClose(InventoryCloseEvent event) {
         cancelRefreshArenas();
-
     }
 }

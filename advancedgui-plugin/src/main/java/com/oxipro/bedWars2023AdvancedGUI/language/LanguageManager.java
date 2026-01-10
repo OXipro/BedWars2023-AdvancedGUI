@@ -6,6 +6,8 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class LanguageManager {
 
     private static enDefault enDefault;
@@ -30,6 +32,11 @@ public class LanguageManager {
     public String getRawMsg(Player player, String path) {
         return bwproxys.getMsg(player, path);
     }
+
+    public List<String> getRawMsgList(Player player, String path) {
+        return bwproxys.getBwproxy().getLanguageUtil().getList(player, path);
+    }
+
 
     // why ? bc its cool to make a manager
 }
