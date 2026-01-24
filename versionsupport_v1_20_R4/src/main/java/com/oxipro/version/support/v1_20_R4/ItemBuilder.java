@@ -1,8 +1,10 @@
 package com.oxipro.version.support.v1_20_R4;
 
+import com.oxipro.bedWars2023AdvancedGUI.api.ItemType;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -22,7 +24,7 @@ public class ItemBuilder implements com.oxipro.bedWars2023AdvancedGUI.api.Suppor
     private v1_20_R4 v1_20_r4;
 
     private String category;
-    private String type;
+    private ItemType type;
     private String arena;
     private String base64;
     private boolean isHead;
@@ -121,7 +123,7 @@ public class ItemBuilder implements com.oxipro.bedWars2023AdvancedGUI.api.Suppor
     }
 
     @Override
-    public ItemBuilder setType(String type) {
+    public ItemBuilder setType(ItemType type) {
         this.type = type;
         return this;
     }
@@ -145,7 +147,7 @@ public class ItemBuilder implements com.oxipro.bedWars2023AdvancedGUI.api.Suppor
             item = v1_20_r4.setItemTag(item, "agui.category", category);
         }
         if (type != null) {
-            item = v1_20_r4.setItemTag(item, "agui.type", type);
+            item = v1_20_r4.setItemTag(item, "agui.type", type.getId());
         }
         if (arena != null) {
             item = v1_20_r4.setItemTag(item, "agui.arena", arena);

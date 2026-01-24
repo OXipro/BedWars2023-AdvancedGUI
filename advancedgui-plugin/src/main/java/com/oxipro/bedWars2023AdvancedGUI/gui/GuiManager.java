@@ -1,5 +1,6 @@
 package com.oxipro.bedWars2023AdvancedGUI.gui;
 
+import com.oxipro.bedWars2023AdvancedGUI.api.ItemType;
 import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.VersionSupport;
 import com.oxipro.bedWars2023AdvancedGUI.config.ConfigurationManager;
 import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategory;
@@ -10,10 +11,12 @@ import com.oxipro.bedWars2023AdvancedGUI.service.*;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.logging.Logger;
 
 public class GuiManager {
@@ -111,15 +114,13 @@ public class GuiManager {
         openGui(player, new MapSelectorGui(this, category));
     }
 
-    public BwProxyService getBwProxyService() {return bwProxyService; }
+    public BwProxyService getBwProxyService() { return bwProxyService; }
 
-    public Component getMMMsg(Player player, String path) {return languageManager.getMMMsg(player, path); }
+    public String getRawMsg(Player player, String path) { return languageManager.getRawMsg(player, path); }
 
-    public String getRawMsg(Player player, String path) {return languageManager.getRawMsg(player, path); }
+    public List<String> getRawMsgList(Player player, String path) { return languageManager.getRawMsgList(player, path); }
 
-    public List<String> getRawMsgList(Player player, String path) {return languageManager.getRawMsgList(player, path); }
-
-    public LanguageManager getLanguageManager() {return languageManager; }
+    public LanguageManager getLanguageManager() { return languageManager; }
 
     public BwCategoryMenu loadBwCategoryMenu() {
         return bwCategoryMenu;
@@ -131,5 +132,5 @@ public class GuiManager {
 
     public HotbarManagerService getHBMService() { return hbms; }
 
-    public VersionSupport getVersionSupport() {return versionSupport;}
+    public VersionSupport getVersionSupport() { return versionSupport; }
 }

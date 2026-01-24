@@ -80,6 +80,7 @@ public class ArenaItem {
                 .lore(LoreList)
                 .amount(amount)
                 .setArena(arenaIdentifier)
+                .player(player)
                 .build();
     }
 }

@@ -1,5 +1,6 @@
 package com.oxipro.bedWars2023AdvancedGUI.gui;
 
+import com.oxipro.bedWars2023AdvancedGUI.api.ItemType;
 import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.VersionSupport;
 import com.oxipro.bedWars2023AdvancedGUI.util.ArenaItem;
 import com.oxipro.bedWars2023AdvancedGUI.util.RejoinItem;
@@ -14,8 +15,8 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.BiConsumer;
 
 import static com.oxipro.bedWars2023AdvancedGUI.config.ConfigPaths.*;
 import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.*;
@@ -28,8 +29,7 @@ public class MainGui extends AbstractGui {
     private BukkitRunnable drawOTFArenasRunnable;
     private FileConfiguration config;
     private VersionSupport versionSupport;
-
-
+    private final Map<ItemType, BiConsumer<Player, InventoryClickEvent>> itemActions = new EnumMap<>(ItemType.class);
 
 
     public MainGui(GuiManager guiManager, Player player) {
@@ -65,6 +65,40 @@ public class MainGui extends AbstractGui {
     }
 
     protected void init() {
+
+        itemActions.put(ItemType.QUICK_JOIN, (player, event) -> {
+            if (guiManager.getBwProxyService().getBwproxy().getArenaUtil().joinRandomArena(player)) {
+                cancelRefreshArenas();
+            }
+        });
+
+        itemActions.put(ItemType.CATEGORIES_SELECTOR_OPENER, (player, event) -> {
+            guiManager.openCategoryGui(player);
+            cancelRefreshArenas();
+        });
+
+        itemActions.put(ItemType.HOTBAR_MANAGER_OPENER, (player, event) -> {
+            guiManager.markIgnoreClose(player);
+            guiManager.getHBMService().getHbmAPI().getMenuUtil().openCategoryMenu(player);
+            cancelRefreshArenas();
+        });
+
+        itemActions.put(ItemType.REJOIN, (player, event) -> {
+            if (rj != null) {
+                guiManager.resume().rejoin(player);
+                cancelRefreshArenas();
+            }
+        });
+
+        itemActions.put(ItemType.QUICK_ARENA, (player, event) -> {
+            String arena = versionSupport.getItemTag(event.getCurrentItem(), "agui.arena");
+            if (arena != null) {
+                CachedArena cachedArena = ArenaManager.getArenaByIdentifier(arena);
+                if (cachedArena.addPlayer(player, null)) {
+                    cancelRefreshArenas();
+                }
+            }
+        });
     }
 
     @Override
@@ -72,26 +106,6 @@ public class MainGui extends AbstractGui {
         drawArenas();
 
         if (config.getBoolean(GUI_MAIN_REJOIN_ENABLED)) {
-//            Component rjg;
-//            String mt;
-//            List<String> lore;
-//            if (rj == null) {
-//                rjg = guiManager.getMMMsg(player, GUI_REJOIN_UNAVAILABLE_NAME);
-//                mt = config.getString(GUI_MAIN_REJOIN_MATERIAL_UNAVAILABLE);
-//                lore = List.of(guiManager.getBwProxyService().getMsg(player, GUI_REJOIN_UNAVAILABLE_LORE));
-//            } else {
-//                rjg = guiManager.getMMMsg(player, GUI_REJOIN_AVAILABLE_NAME);
-//                mt = config.getString(GUI_MAIN_REJOIN_MATERIAL_AVAILABLE);
-//                lore = List.of(guiManager.getBwProxyService().getMsg(player, GUI_REJOIN_AVAILABLE_LORE));
-                    // lore.replaceAll(s -> s.replace("{arena_display_name}", rj.getArena().getDisplayName(guiManager.getBwProxyService().getPlayerLanguage(player))));
-//            }
-//
-//            inventory.setItem(config.getInt(GUI_MAIN_REJOIN_SLOT),
-//                    new ItemBuilder(mt)
-//                            .name(rjg)
-//                            .lore(lore)
-//                            .build()
-//            );
             inventory.setItem(config.getInt(GUI_MAIN_REJOIN_SLOT),
                     new RejoinItem(config, guiManager.getBwProxyService(), guiManager.getLanguageManager(), player, versionSupport)
                             .rejoin(rj)
@@ -104,7 +118,8 @@ public class MainGui extends AbstractGui {
                     versionSupport.itemBuilder(config.getString(GUI_MAIN_QUICK_JOIN_MATERIAL))
                             .name(guiManager.getRawMsg(player, GUI_QUICK_JOIN_NAME))
                             .lore(guiManager.getRawMsgList(player, GUI_QUICK_JOIN_LORE))
-                            .setType("quick_join")
+                            .setType(ItemType.QUICK_JOIN)
+                            .player(player)
                             .build()
             );
         }
@@ -114,7 +129,8 @@ public class MainGui extends AbstractGui {
                     versionSupport.itemBuilder(config.getString(GUI_MAIN_CATEGORIES_MATERIAL))
                             .name(guiManager.getRawMsg(player, GUI_CATEGORIES_NAME))
                             .lore(guiManager.getRawMsgList(player, GUI_CATEGORIES_LORE))
-                            .setType("categories")
+                            .setType(ItemType.CATEGORIES_SELECTOR_OPENER)
+                            .player(player)
                             .build()
             );
         }
@@ -124,7 +140,8 @@ public class MainGui extends AbstractGui {
                     versionSupport.itemBuilder(config.getString(GUI_MAIN_HOTBAR_MATERIAL))
                             .name(guiManager.getRawMsg(player, GUI_HBM_NAME))
                             .lore(guiManager.getRawMsgList(player, GUI_HBM_LORE))
-                            .setType("hbm")
+                            .setType(ItemType.HOTBAR_MANAGER_OPENER)
+                            .player(player)
                             .build()
             );
         }
@@ -134,7 +151,8 @@ public class MainGui extends AbstractGui {
                     versionSupport.itemBuilder(config.getString(GUI_MAIN_QUICK_BUY_MATERIAL))
                             .name(guiManager.getRawMsg(player, GUI_QUICK_BUY_NAME))
                             .lore(guiManager.getRawMsgList(player, GUI_QUICK_BUY_LORE))
-                            .setType("quick_buy")
+                            .setType(ItemType.LOBBY_EDITOR_OPENER)
+                            .player(player)
                             .build()
             );
         }
@@ -162,70 +180,42 @@ public class MainGui extends AbstractGui {
 
     @Override
     public void onClick(InventoryClickEvent event) {
-        int slot = event.getRawSlot();
-        switch (slot) {
-            case 10:
-                if (guiManager.getBwProxyService().getBwproxy().getArenaUtil().joinRandomArena(player)) {
-                    cancelRefreshArenas();
-                }
-                return;
-            case 27:
-                guiManager.openCategoryGui(player);
-                cancelRefreshArenas();
-                return;
-            case 28:
-                guiManager.markIgnoreClose(player);
-                guiManager.getHBMService().getHbmAPI().getMenuUtil().openCategoryMenu(player);
-                cancelRefreshArenas();
-                return;
-            case 35:
-                if (rj != null) {
-                    guiManager.resume().rejoin(player);
-                    cancelRefreshArenas();
-                }
-                return;
-            default:
-                String arena = versionSupport.getItemTag(event.getCurrentItem(), "agui.arena");
-                if ( arena != null ) {
-                    CachedArena cachedArena = ArenaManager.getArenaByIdentifier(arena);
-                    if (cachedArena.addPlayer(player, null)) {
-                        cancelRefreshArenas();
-                    }
-                }
-        }
 
+        ItemType type = ItemType.fromId(versionSupport.getItemTag(event.getCurrentItem(), "agui.type"));
+        BiConsumer<Player, InventoryClickEvent> action = itemActions.get(type);
+        if (action != null) { action.accept(player, event); }
 
-
-//        if (slot == 10) {
-//            guiManager.openCategoryGui(player);
-//            return;
+//        int slot = event.getRawSlot();
+//        switch (Objects.requireNonNull(ItemType.fromId(versionSupport.getItemTag(event.getCurrentItem(), "agui.type")))) {
+//            case QUICK_JOIN:
+//                if (guiManager.getBwProxyService().getBwproxy().getArenaUtil().joinRandomArena(player)) {
+//                    cancelRefreshArenas();
+//                }
+//                return;
+//            case CATEGORIES_SELECTOR_OPENER:
+//                guiManager.openCategoryGui(player);
+//                cancelRefreshArenas();
+//                return;
+//            case HOTBAR_MANAGER_OPENER:
+//                guiManager.markIgnoreClose(player);
+//                guiManager.getHBMService().getHbmAPI().getMenuUtil().openCategoryMenu(player);
+//                cancelRefreshArenas();
+//                return;
+//            case REJOIN:
+//                if (rj != null) {
+//                    guiManager.resume().rejoin(player);
+//                    cancelRefreshArenas();
+//                }
+//                return;
+//            case QUICK_ARENA:
+//                String arena = versionSupport.getItemTag(event.getCurrentItem(), "agui.arena");
+//                if ( arena != null ) {
+//                    CachedArena cachedArena = ArenaManager.getArenaByIdentifier(arena);
+//                    if (cachedArena.addPlayer(player, null)) {
+//                        cancelRefreshArenas();
+//                    }
+//                }
 //        }
-//
-//        if (slot == 27) {
-//            guiManager.openCategoryGui(player);
-//            return;
-//        }
-//
-//        if (slot == 28) {
-//            guiManager.getHBMService().getHbmAPI().getMenuUtil().openCategoryMenu(player);
-//            return;
-//        }
-//
-//        if (slot == 35) {
-//            if (rj != null) {
-//                guiManager.resume().rejoin(player);
-//            }
-//            return;
-//        }
-//        PersistentDataContainerView pdc =  inventory.getItem(slot).getPersistentDataContainer();
-//        if (pdc != null) {
-//            if (pdc.has(new NamespacedKey("agui", "arena"))) {
-//                CachedArena cachedArena = ArenaManager.getArenaByIdentifier(pdc.get(new NamespacedKey("agui", "arena"), PersistentDataType.STRING));
-//                cachedArena.addPlayer(player, null);
-//            }
-//            return;
-//        }
-
     }
 
     @Override

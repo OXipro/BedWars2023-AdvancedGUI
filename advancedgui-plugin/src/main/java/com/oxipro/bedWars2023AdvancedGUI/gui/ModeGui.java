@@ -2,6 +2,7 @@ package com.oxipro.bedWars2023AdvancedGUI.gui;
 
 import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.VersionSupport;
 import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategory;
+import com.oxipro.bedWars2023AdvancedGUI.language.LanguageManager;
 import com.oxipro.bedWars2023AdvancedGUI.util.RejoinItem;
 import com.tomkeuper.bedwars.proxy.api.CachedArena;
 import com.tomkeuper.bedwars.proxy.api.RemoteReJoin;
@@ -22,6 +23,7 @@ public class ModeGui extends AbstractGui {
     private Player player;
     private FileConfiguration config;
     private final VersionSupport versionSupport;
+    private final LanguageManager languageManager;
 
     public ModeGui(GuiManager guiManager, BwCategory category, Player player) {
         super(guiManager, 4, "Selected Mode: " + category.getFancyName());
@@ -30,6 +32,7 @@ public class ModeGui extends AbstractGui {
         this.rj = guiManager.resume().getReJoin(player);
         this.versionSupport = guiManager.getVersionSupport();
         this.config = guiManager.getConfigurationManager().getConfig();
+        this.languageManager = guiManager.getLanguageManager();
         draw();
     }
 
@@ -41,47 +44,54 @@ public class ModeGui extends AbstractGui {
     protected void draw() {
 
         if (config.getBoolean(GUI_MODE_QUICK_JOIN_ENABLED)) {
-            inventory.setItem(10,
+            inventory.setItem(config.getInt(GUI_MODE_QUICK_JOIN_SLOT),
                             versionSupport.itemBuilder(config.getString(GUI_MODE_QUICK_JOIN_MATERIAL))
-                            .name("Random Map")
+                            .name(languageManager.getRawMsg(player, GUI_QUICK_JOIN_NAME))
+                            .lore(languageManager.getRawMsgList(player, GUI_QUICK_JOIN_LORE))
+                            .player(player)
                             .build()
             );
         }
 
         if (config.getBoolean(GUI_MODE_MAP_SELECTOR_ENABLED)) {
-            inventory.setItem(14,
+            inventory.setItem(config.getInt(GUI_MODE_MAP_SELECTOR_SLOT),
                     versionSupport.itemBuilder(config.getString(GUI_MODE_MAP_SELECTOR_MATERIAL))
                             .name("Select Map")
+                            .lore(languageManager.getRawMsgList(player, GUI_MODE_MAP_SELECTOR_MATERIAL))
+                            .player(player)
                             .build()
             );
         }
 
         if (config.getBoolean(GUI_MODE_CATEGORIES_ENABLED)) {
-            inventory.setItem(27,
+            inventory.setItem(config.getInt(GUI_MODE_CATEGORIES_SLOT),
                     versionSupport.itemBuilder(config.getString(GUI_MODE_CATEGORIES_MATERIAL))
                             .name("Categories")
+                            .player(player)
                             .build()
             );
         }
 
         if (config.getBoolean(GUI_MODE_HOTBAR_ENABLED)) {
-            inventory.setItem(28,
+            inventory.setItem(config.getInt(GUI_MODE_HOTBAR_SLOT),
                     versionSupport.itemBuilder(config.getString(GUI_MODE_CATEGORIES_MATERIAL))
                             .name("Hotbar Manager")
+                            .player(player)
                             .build()
             );
         }
 
         if (config.getBoolean(GUI_MODE_QUICK_BUY_ENABLED)) {
-            inventory.setItem(29,
+            inventory.setItem(config.getInt(GUI_MODE_QUICK_BUY_SLOT),
                     versionSupport.itemBuilder(config.getString(GUI_MODE_QUICK_BUY_MATERIAL))
                             .name("Quick Buy")
+                            .player(player)
                             .build()
             );
         }
 
         if (config.getBoolean(GUI_MODE_REJOIN_ENABLED)) {
-            inventory.setItem(29,
+            inventory.setItem(config.getInt(GUI_MODE_REJOIN_SLOT),
                     new RejoinItem(guiManager.getConfigurationManager().getConfig(), guiManager.getBwProxyService(), guiManager.getLanguageManager(), player, versionSupport)
                             .rejoin(rj)
                             .build()

@@ -1,5 +1,6 @@
 package com.oxipro.bedWars2023AdvancedGUI.util;
 
+import com.oxipro.bedWars2023AdvancedGUI.api.ItemType;
 import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.VersionSupport;
 import com.oxipro.bedWars2023AdvancedGUI.language.LanguageManager;
 import com.oxipro.bedWars2023AdvancedGUI.service.BwProxyService;
@@ -59,7 +60,8 @@ public class RejoinItem {
         return versionSupport.itemBuilder(mt)
                 .name(rjg)
                 .lore(lore)
-                .setType("rejoin")
+                .setType(ItemType.REJOIN)
+                .player(player)
                 .build();
     }
 }

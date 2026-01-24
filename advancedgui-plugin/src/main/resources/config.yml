@@ -46,34 +46,6 @@ gui:
       enabled: false
       slot: 29
       material: "EMERALD" # can be head TEXTURE
-  mode:
-    title: "Selected: <"
-    rows: 4
-    map-selector:
-      enabled: true
-      slot: 14
-      material: "OAK_SIGN" # can be head TEXTURE
-    rejoin:
-      enabled: true
-      slot: 35
-      material-available: "ENDER_PEARL" # can be head TEXTURE
-      material-unavailable: "BARRIER" # can be head texture
-    quick-join:
-      enabled: true
-      slot: 10
-      material: "NETHER_STAR" # can be head TEXTURE
-    categories:
-      enabled: true
-      slot: 27
-      material: "CHEST" # can be head TEXTURE
-    hotbar-manager:
-      enabled: true
-      slot: 28
-      material: "BLAZE_ROD" # can be head TEXTURE
-    quick-buy:
-      enabled: false
-      slot: 29
-      material: "EMERALD" # can be head TEXTURE
   map-selector:
     rows: 6
     back:

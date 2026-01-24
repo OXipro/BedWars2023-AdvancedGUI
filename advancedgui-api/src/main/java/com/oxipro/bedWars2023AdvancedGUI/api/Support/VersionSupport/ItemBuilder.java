@@ -1,5 +1,6 @@
 package com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport;
 
+import com.oxipro.bedWars2023AdvancedGUI.api.ItemType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.entity.Player;
 
@@ -21,7 +22,7 @@ public interface ItemBuilder {
 
     ItemBuilder setArena(String value);
 
-    ItemBuilder setType(String type);
+    ItemBuilder setType(ItemType type);
 
     ItemStack build();
 }

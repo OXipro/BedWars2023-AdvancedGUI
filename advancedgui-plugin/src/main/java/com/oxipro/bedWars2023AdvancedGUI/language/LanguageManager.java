@@ -2,8 +2,6 @@ package com.oxipro.bedWars2023AdvancedGUI.language;
 
 import com.oxipro.bedWars2023AdvancedGUI.language.LanguageDefault.*;
 import com.oxipro.bedWars2023AdvancedGUI.service.BwProxyService;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -23,10 +21,6 @@ public class LanguageManager {
 
     public void save() {
         enDefault.save();
-    }
-
-    public Component getMMMsg(Player player, String path) {
-        return MiniMessage.miniMessage().deserialize(bwproxys.getMsg(player, path));
     }
 
     public String getRawMsg(Player player, String path) {

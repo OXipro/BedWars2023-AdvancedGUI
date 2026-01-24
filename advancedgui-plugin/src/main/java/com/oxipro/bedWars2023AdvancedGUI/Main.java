@@ -172,7 +172,7 @@ public final class Main extends JavaPlugin {
     }
 
     public String getNMSVersion() {
-        String packageName = Bukkit.getServer().getClass().getPackage().getName(); // org.bukkit.craftbukkit.V1_21_R4
-        return packageName.substring(packageName.lastIndexOf(".") + 1); // V1_21_R4
+        String packageName = Bukkit.getServer().getClass().getPackage().getName();
+        return packageName.substring(packageName.lastIndexOf(".") + 1);
     }
 }
