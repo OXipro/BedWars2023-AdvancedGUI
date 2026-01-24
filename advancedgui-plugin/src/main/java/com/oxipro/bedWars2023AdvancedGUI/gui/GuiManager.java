@@ -1,5 +1,6 @@
 package com.oxipro.bedWars2023AdvancedGUI.gui;
 
+import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.VersionSupport;
 import com.oxipro.bedWars2023AdvancedGUI.config.ConfigurationManager;
 import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategory;
 import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategoryMenu;
@@ -12,9 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class GuiManager {
@@ -28,6 +27,8 @@ public class GuiManager {
     private final BwProxyService bwProxyService;
     private final HotbarManagerService hbms;
     private final LanguageManager languageManager;
+    private final VersionSupport versionSupport;
+    private final Set<UUID> ignoreNextClose = new HashSet<>();
 
 
     private final Map<Player, AbstractGui> openGuis = new HashMap<>();
@@ -40,7 +41,8 @@ public class GuiManager {
             ConfigurationManager configurationManager,
             BwProxyService bwProxyService,
             HotbarManagerService hbms,
-            LanguageManager languageManager
+            LanguageManager languageManager,
+            VersionSupport versionSupport
     ) {
         this.plugin = plugin;
         this.arenaService = arenaService;
@@ -51,6 +53,7 @@ public class GuiManager {
         this.resumeService = resumeService;
         this.hbms = hbms;
         this.languageManager = languageManager;
+        this.versionSupport = versionSupport;
 
     }
 
@@ -74,6 +77,18 @@ public class GuiManager {
 
     public AbstractGui getOpenGui(Player player) {
         return openGuis.get(player);
+    }
+
+    public AbstractGui removeOpenGui(Player player) {
+        return openGuis.remove(player);
+    }
+
+    public void markIgnoreClose(Player player) {
+        ignoreNextClose.add(player.getUniqueId());
+    }
+
+    public boolean shouldIgnoreClose(Player player) {
+        return ignoreNextClose.remove(player.getUniqueId());
     }
 
     public ArenaService arenas() {
@@ -114,6 +129,7 @@ public class GuiManager {
 
     public Plugin getPlugin() { return plugin; }
 
-
     public HotbarManagerService getHBMService() { return hbms; }
+
+    public VersionSupport getVersionSupport() {return versionSupport;}
 }

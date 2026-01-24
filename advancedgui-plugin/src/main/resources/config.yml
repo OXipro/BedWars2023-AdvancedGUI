@@ -1,9 +1,9 @@
 # Heads textures are always in base64
 # where heads materials are possible if the string does not correspond to a bas64 head or a Bukkit Material then defaulted to BARRIER
 
-force-legacy-material-load-at-enable: true
 gui:
   main: # all items in the gui
+    title: ""
     rows: 4
     quick-arenas:
       enabled: true
@@ -24,6 +24,34 @@ gui:
       material-playing: "LIGHT_BLUE_STAINED_GLASS"
       material-restarting: "BLUE_STAINED_GLASS"
       material-no-arena: "BARRIER"
+    rejoin:
+      enabled: true
+      slot: 35
+      material-available: "ENDER_PEARL" # can be head TEXTURE
+      material-unavailable: "BARRIER" # can be head texture
+    quick-join:
+      enabled: true
+      slot: 10
+      material: "NETHER_STAR" # can be head TEXTURE
+    categories:
+      enabled: true
+      slot: 27
+      material: "CHEST" # can be head TEXTURE
+    hotbar-manager:
+      enabled: true
+      slot: 28
+      material: "BLAZE_ROD" # can be head TEXTURE
+    quick-buy:
+      enabled: false
+      slot: 29
+      material: "EMERALD" # can be head TEXTURE
+  mode:
+    title: "Selected: <"
+    rows: 4
+    map-selector:
+      enabled: true
+      slot: 14
+      material: "OAK_SIGN" # can be head TEXTURE
     rejoin:
       enabled: true
       slot: 35

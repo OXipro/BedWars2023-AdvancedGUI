@@ -1,26 +1,25 @@
 package com.oxipro.bedWars2023AdvancedGUI.gui;
 
+import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.VersionSupport;
 import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategory;
-import com.oxipro.bedWars2023AdvancedGUI.util.ItemBuilder;
 import com.tomkeuper.bedwars.proxy.api.CachedArena;
 import com.tomkeuper.bedwars.proxy.api.Language;
 import com.tomkeuper.bedwars.proxy.arenamanager.ArenaManager;
-import io.papermc.paper.persistence.PersistentDataContainerView;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 
 import java.util.List;
 
 public class MapSelectorGui extends AbstractGui {
 
     private final BwCategory category;
+    private final VersionSupport versionSupport;
 
     public MapSelectorGui(GuiManager guiManager, BwCategory category) {
         super(guiManager, 6, "Selected Category: " + category.getFancyName());
         this.category = category;
+        this.versionSupport = guiManager.getVersionSupport();
         draw();
     }
 
@@ -45,7 +44,7 @@ public class MapSelectorGui extends AbstractGui {
                     "<b><color:#ffb300>Click to join!</color></b>"
             );
 
-            inventory.setItem(slot++, new ItemBuilder(Material.PAPER)
+            inventory.setItem(slot++, versionSupport.itemBuilder("PAPER")
                         .name("<green>" + cachedArena.getDisplayName(playerLanguage))
                         .lore(ll)
                         .setArena(cachedArena.getRemoteIdentifier())
@@ -55,7 +54,7 @@ public class MapSelectorGui extends AbstractGui {
 
 
         inventory.setItem(49,
-                new ItemBuilder(Material.ARROW)
+                versionSupport.itemBuilder("ARROW")
                         .name("Back")
                         .build()
         );
@@ -68,18 +67,20 @@ public class MapSelectorGui extends AbstractGui {
         player = (Player) event.getWhoClicked();
 
         if (slot >= 10 && slot <= 43) {
-            PersistentDataContainerView pdc =  inventory.getItem(slot).getPersistentDataContainer();
-            if (pdc != null) {
-                if (pdc.has(new NamespacedKey("agui", "arena"))) {
-                    CachedArena cachedArena = ArenaManager.getArenaByIdentifier(pdc.get(new NamespacedKey("agui", "arena"), PersistentDataType.STRING));
-                    cachedArena.addPlayer(player, null);
-                    return;
-                } return;
-            } return;
+            String arena = versionSupport.getItemTag(event.getCurrentItem(), "agui_arena");
+            if ( arena != null ) {
+                CachedArena cachedArena = ArenaManager.getArenaByIdentifier(arena);
+                cachedArena.addPlayer(player, null);
+            }
         }
 
         if (slot == 49) {
             guiManager.openModeGui((Player) event.getWhoClicked(), category);
         }
+    }
+
+    @Override
+    public void onClose(InventoryCloseEvent event) {
+        guiManager.removeOpenGui((Player) event.getPlayer());
     }
 }

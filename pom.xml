@@ -12,13 +12,22 @@
     <name>BedWars2023-AdvancedGUI</name>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <modules>
         <module>advancedgui-plugin</module>
         <module>advancedgui-api</module>
+        <module>versionsupport_v1_8_R3</module>
+        <module>versionsupport_v1_12_R1</module>
+        <module>versionsupport_v1_16_R3</module>
+        <module>versionsupport_v1_17_R1</module>
+        <module>versionsupport_v1_18_R2</module>
+        <module>versionsupport_v1_20_R4</module>
+        <module>versionsupport_v1_21_R5</module>
+        <module>platformsupport_legacy</module>
+        <module>platformsupport_modern_paper</module>
     </modules>
 
     <build>
@@ -54,4 +63,27 @@
             </resource>
         </resources>
     </build>
+    <repositories>
+        <repository>
+            <id>placeholderapi</id>
+            <url>https://repo.extendedclip.com/releases/</url>
+        </repository>
+        <repository>
+            <id>Jitpack</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    <dependencies>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-api</artifactId>
+            <version>4.26.1</version>
+        </dependency>
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.11.7</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>

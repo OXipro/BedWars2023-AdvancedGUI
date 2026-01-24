@@ -3,6 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.oxipro</groupId>
   <artifactId>BedWars2023-AdvancedGUI</artifactId>
+  <packaging>pom</packaging>
   <name>BedWars2023-AdvancedGUI</name>
   <version>0.0.1</version>
   <build>
@@ -36,40 +37,39 @@
       </plugin>
     </plugins>
   </build>
+  <modules>
+    <module>advancedgui-plugin</module>
+    <module>advancedgui-api</module>
+    <module>versionsupport_v1_8_R3</module>
+    <module>versionsupport_v1_12_R1</module>
+    <module>versionsupport_v1_16_R3</module>
+    <module>versionsupport_v1_17_R1</module>
+    <module>versionsupport_v1_18_R2</module>
+    <module>versionsupport_v1_20_R4</module>
+    <module>versionsupport_v1_21_R5</module>
+    <module>platformsupport_legacy</module>
+    <module>platformsupport_modern_paper</module>
+  </modules>
   <repositories>
     <repository>
-      <id>papermc</id>
-      <url>https://repo.papermc.io/repository/maven-public/</url>
+      <id>placeholderapi</id>
+      <url>https://repo.extendedclip.com/releases/</url>
     </repository>
     <repository>
-      <id>bedwars2023-releases</id>
-      <url>https://repo.tomkeuper.com/repository/releases/</url>
+      <id>Jitpack</id>
+      <url>https://jitpack.io</url>
     </repository>
   </repositories>
   <dependencies>
     <dependency>
-      <groupId>io.papermc.paper</groupId>
-      <artifactId>paper-api</artifactId>
-      <version>1.21.8-R0.1-SNAPSHOT</version>
+      <groupId>me.clip</groupId>
+      <artifactId>placeholderapi</artifactId>
+      <version>2.11.7</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.tomkeuper.bedwars</groupId>
-      <artifactId>BWProxy2023</artifactId>
-      <version>1.0</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/libs/proxy-plugin-1.0.jar</systemPath>
-    </dependency>
-    <dependency>
-      <groupId>me.kiiya</groupId>
-      <artifactId>BedWars-HotbarManager</artifactId>
-      <version>1.6.0</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/libs/hotbarmanager-plugin-1.6.0v2.jar</systemPath>
     </dependency>
   </dependencies>
   <properties>
-    <java.version>21</java.version>
+    <java.version>11</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 </project>

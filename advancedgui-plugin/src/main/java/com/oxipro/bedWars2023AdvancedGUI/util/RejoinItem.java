@@ -1,13 +1,11 @@
 package com.oxipro.bedWars2023AdvancedGUI.util;
 
-import com.oxipro.bedWars2023AdvancedGUI.gui.GuiManager;
+import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.VersionSupport;
 import com.oxipro.bedWars2023AdvancedGUI.language.LanguageManager;
 import com.oxipro.bedWars2023AdvancedGUI.service.BwProxyService;
 import com.tomkeuper.bedwars.proxy.api.CachedArena;
 import com.tomkeuper.bedwars.proxy.api.Language;
 import com.tomkeuper.bedwars.proxy.api.RemoteReJoin;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -25,6 +23,7 @@ public class RejoinItem {
     private BW_Placeholders bwPlaceholders;
     private LanguageManager languageManager;
     private Player player;
+    private final VersionSupport versionSupport;
 
     private String mt;
     private String rjg;
@@ -32,12 +31,13 @@ public class RejoinItem {
 
 
 
-    public RejoinItem(FileConfiguration configuration, BwProxyService bwProxyService, LanguageManager languageManager, Player player) {
+    public RejoinItem(FileConfiguration configuration, BwProxyService bwProxyService, LanguageManager languageManager, Player player, VersionSupport versionSupport) {
         this.config = configuration;
         this.bwProxyService = bwProxyService;
         this.languageManager = languageManager;
         this.player = player;
         this.language = bwProxyService.getPlayerLanguage(player);
+        this.versionSupport = versionSupport;
     }
 
     public RejoinItem rejoin(RemoteReJoin rj) {
@@ -56,9 +56,10 @@ public class RejoinItem {
     }
 
     public ItemStack build() {
-        return new ItemBuilder(mt)
+        return versionSupport.itemBuilder(mt)
                 .name(rjg)
                 .lore(lore)
+                .setType("rejoin")
                 .build();
     }
 }

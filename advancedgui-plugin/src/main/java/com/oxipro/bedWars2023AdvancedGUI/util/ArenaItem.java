@@ -1,5 +1,6 @@
 package com.oxipro.bedWars2023AdvancedGUI.util;
 
+import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.VersionSupport;
 import com.oxipro.bedWars2023AdvancedGUI.language.LanguageManager;
 import com.oxipro.bedWars2023AdvancedGUI.service.BwProxyService;
 import com.tomkeuper.bedwars.proxy.api.CachedArena;
@@ -9,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
-import java.util.Map;
 
 import static com.oxipro.bedWars2023AdvancedGUI.config.ConfigPaths.*;
 import static com.oxipro.bedWars2023AdvancedGUI.language.LanguagePaths.*;
@@ -22,14 +22,16 @@ public class ArenaItem {
     private BW_Placeholders bwPlaceholders;
     private LanguageManager languageManager;
     private Player player;
+    private VersionSupport versionSupport;
 
-    public ArenaItem(CachedArena arena, FileConfiguration configuration, BwProxyService bwProxyService, LanguageManager languageManager, Player player) {
+    public ArenaItem(CachedArena arena, FileConfiguration configuration, BwProxyService bwProxyService, LanguageManager languageManager, Player player, VersionSupport versionSupport) {
         this.arena = arena;
         this.config = configuration;
         this.bwProxyService = bwProxyService;
         this.languageManager = languageManager;
         this.player = player;
         this.language = bwProxyService.getPlayerLanguage(player);
+        this.versionSupport = versionSupport;
     }
 
 
@@ -41,7 +43,7 @@ public class ArenaItem {
         List<String> LoreList = languageManager.getRawMsgList(player, GUI_ARENAS_DEFAULT_LORE);
 
         if (arena == null) {
-            return new ItemBuilder(material)
+            return versionSupport.itemBuilder(material)
                     .name(languageManager.getRawMsg(player, GUI_ARENAS_NO_ARENA_NAME))
                     .lore(languageManager.getRawMsgList(player, GUI_ARENAS_NO_ARENA_LORE))
                     .build();
@@ -73,7 +75,7 @@ public class ArenaItem {
         }
 
         String arenaIdentifier = arena.getRemoteIdentifier();
-        return new ItemBuilder(material)
+        return versionSupport.itemBuilder(material)
                 .name(name)
                 .lore(LoreList)
                 .amount(amount)

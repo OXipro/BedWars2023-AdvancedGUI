@@ -11,6 +11,7 @@ addons:
           - " <grey>Online:<white> %bw_arena_players%/%bw_arena_max_players%"
           - " <grey>Status: %bw_arena_status%"
           - ""
+          -
           - "<b><color:#ffb300>Click to join!</color></b>"
         waiting: [] # if set to [] will set default
         starting: []  # if set to [] will set default

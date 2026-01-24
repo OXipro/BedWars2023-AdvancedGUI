@@ -1,7 +1,8 @@
 package com.oxipro.bedWars2023AdvancedGUI.listener;
 
-import com.oxipro.bedWars2023AdvancedGUI.gui.AbstractGui;
-import com.oxipro.bedWars2023AdvancedGUI.gui.GuiManager;
+import com.avaje.ebean.config.EncryptDeploy;
+import com.oxipro.bedWars2023AdvancedGUI.gui.*;
+import me.kiiya.hotbarmanager.HotbarManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,10 +19,29 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
+        Player player = (Player) event.getWhoClicked();
+        if (guiManager.getHBMService().isHBMEnabled() && (guiManager.getOpenGui(player) != null)) {
+            String tag = HotbarManager.getInstance().getVersionSupport().getItemTag(event.getCurrentItem(), "hbm");
+            if (tag != null) {
+                if (tag.equals("back")) {
+                    AbstractGui gui = guiManager.getOpenGui(player);
+                    if (gui instanceof ModeGui) {
+                        ModeGui modeGui = (ModeGui) gui;
+                        guiManager.openModeGui(player, modeGui.getCategory());
+                    } else if (gui instanceof MainGui) {
+                        guiManager.openMainGui(player);
+                    }
+                    guiManager.getLogger().info(tag);
+                    guiManager.getLogger().info(gui.toString());
+                }
+            }
+        }
 
-        if (!(event.getInventory().getHolder() instanceof AbstractGui gui)) {
+        if (!(event.getInventory().getHolder() instanceof AbstractGui)) {
             return;
         }
+
+        AbstractGui gui = (AbstractGui) event.getInventory().getHolder();
 
         event.setCancelled(true);
 

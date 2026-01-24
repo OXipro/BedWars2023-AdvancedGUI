@@ -18,9 +18,15 @@ public class InventoryCloseListener implements Listener {
     public void onClick(InventoryCloseEvent event) {
         if (!(event.getPlayer() instanceof Player)) return;
 
-        if (!(event.getInventory().getHolder() instanceof AbstractGui gui)) {
+        if (!(event.getInventory().getHolder() instanceof AbstractGui)) {
             return;
         }
+
+        if (guiManager.shouldIgnoreClose( (Player) event.getPlayer())) {
+            return;
+        }
+
+        AbstractGui gui = (AbstractGui) event.getInventory().getHolder();
 
         if (event.getInventory() == null) return;
         if (event.getInventory() != event.getInventory()) return;
