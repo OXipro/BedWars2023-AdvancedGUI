@@ -45,6 +45,19 @@ gui:
       enabled: false
       slot: 29
       material: "EMERALD" # can be head TEXTURE
+  map-selector:
+    rows: 6
+    back:
+      enabled: true
+      slot: 49
+      material: "ARROW"
+    map:
+      slots: [10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34,37,38,39,40,41,42,43]
+  category:
+    rows: 6
+    categories:
+      2v8:
+        
 
 
 
