@@ -1,10 +1,10 @@
 package com.oxipro.bedWars2023AdvancedGUI.service;
 
+import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.VersionSupport;
 import com.oxipro.bedWars2023AdvancedGUI.language.LanguageManager;
 import com.oxipro.bedWars2023AdvancedGUI.util.ArenaItem;
 import com.tomkeuper.bedwars.proxy.api.*;
 import com.tomkeuper.bedwars.proxy.arenamanager.ArenaManager;
-import org.apache.commons.codec.language.bm.Lang;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -21,12 +21,14 @@ public class ArenaService {
     private Map<CachedArena, ItemStack> arenaItemStackMap = new LinkedHashMap<>();
     private FileConfiguration configuration;
     private LanguageManager languageManager;
+    private VersionSupport versionSupport;
 
-    public ArenaService(JavaPlugin plugin, BwProxyService bwProxyService, FileConfiguration configuration, LanguageManager languageManager) {
+    public ArenaService(JavaPlugin plugin, BwProxyService bwProxyService, FileConfiguration configuration, LanguageManager languageManager, VersionSupport versionSupport) {
         this.plugin = plugin;
         this.bwProxyService = bwProxyService;
         this.configuration = configuration;
         this.languageManager = languageManager;
+        this.versionSupport = versionSupport;
     }
 
     public List<CachedArena> getArenas(boolean onlyJoinable) {
@@ -67,7 +69,7 @@ public class ArenaService {
     public Map<CachedArena, ItemStack> ArenaItemStackMapRefresh(Player player) {
         arenaItemStackMap.clear();
         for (CachedArena arena : getArenas(true)) {
-            ItemStack item = new ArenaItem(arena, configuration, bwProxyService, languageManager, player).createArenaItem();
+            ItemStack item = new ArenaItem(arena, configuration, bwProxyService, languageManager, player, versionSupport).createArenaItem();
             arenaItemStackMap.put(arena, item);
         }
         return arenaItemStackMap;

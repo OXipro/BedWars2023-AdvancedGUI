@@ -14,4 +14,13 @@ public class HotbarManagerService {
     }
 
     public HotbarManager getHbmAPI() { return hbm; }
+
+    public Boolean isHBMEnabled() {
+        if (hbm != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
