@@ -7,7 +7,12 @@ public enum ItemType {
     MAP_SELECTOR_OPENER("map_selector"),
     REJOIN("rejoin"),
     QUICK_ARENA("quick_arena"),
-    QUICK_JOIN("quick_join");
+    QUICK_JOIN("quick_join"),
+    CATEGORY("category"),
+    PAGE_NEXT("page_next"),
+    PAGE_BACK("page_back"),
+    MAP("map");
+
 
     private final String id;
 

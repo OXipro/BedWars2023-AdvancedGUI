@@ -1,10 +1,7 @@
-# Heads textures are always in base64
+# Heads textures are always in base64 or url for 1.21+
 # where heads materials are possible if the string does not correspond to a bas64 head or a Bukkit Material then defaulted to BARRIER
-
-force-legacy-material-load-at-enable: true
 gui:
   main: # all items in the gui
-    title: ""
     rows: 4
     quick-arenas:
       enabled: true
@@ -12,14 +9,13 @@ gui:
         enabled: true
         delay: 40 # in ticks
       start-slot: 12
-      slots-count: 5
-      # theses can be heads
+      slots: [12,13,14,15,16]
       show:
-        full: false
         waiting: true
         starting: true
         restarting: false
         playing: false
+        full: false
       material-waiting: "YELLOW_STAINED_GLASS"
       material-starting: "LIME_STAINED_GLASS"
       material-playing: "LIGHT_BLUE_STAINED_GLASS"
@@ -28,42 +24,92 @@ gui:
     rejoin:
       enabled: true
       slot: 35
-      material-available: "ENDER_PEARL" # can be head TEXTURE
-      material-unavailable: "BARRIER" # can be head texture
+      material-available: "ENDER_PEARL"
+      material-unavailable: "BARRIER"
     quick-join:
       enabled: true
       slot: 10
-      material: "NETHER_STAR" # can be head TEXTURE
+      material: "NETHER_STAR"
     categories:
       enabled: true
       slot: 27
-      material: "CHEST" # can be head TEXTURE
+      material: "CHEST"
     hotbar-manager:
       enabled: true
       slot: 28
-      material: "BLAZE_ROD" # can be head TEXTURE
+      material: "BLAZE_ROD"
     quick-buy:
       enabled: false
       slot: 29
-      material: "EMERALD" # can be head TEXTURE
+      material: "EMERALD"
+  categories-selector:
+    rows: 3
+    categories:
+      1x8:
+        slot: 11
+        item-material: "CHEST"
+        item-amount: 1
+      2x8:
+        slot: 12
+        item-material: "CHEST"
+        item-amount: 1
+      3x4:
+        slot: 13
+        item-material: "CHEST"
+        item-amount: 1
+      4x4:
+        slot: 14
+        item-material: "CHEST"
+        item-amount: 1
+      2x2:
+        slot: 15
+        item-material: "CHEST"
+        item-amount: 1
+  category-menu:
+    rows: 4
+    rejoin:
+      enabled: true
+      slot: 35
+      material-available: "ENDER_PEARL"
+      material-unavailable: "BARRIER"
+    quick-join:
+      enabled: true
+      slot: 12
+      material: "NETHER_STAR"
+    categories:
+      enabled: true
+      slot: 27
+      material: "CHEST"
+    hotbar-manager:
+      enabled: true
+      slot: 28
+      material: "BLAZE_ROD"
+    quick-buy:
+      enabled: false
+      slot: 29
+      material: "EMERALD"
+    map-selector:
+      enabled: true
+      slot: 14
+      material: "MAP"
   map-selector:
     rows: 6
+    back-page:
+      enabled: true
+      slot: 18
+      material: "ARROW"
+    next-page:
+      enabled: true
+      slot: 26
+      material: "ARROW"
     back:
       enabled: true
       slot: 49
       material: "ARROW"
-    map:
+    maps:
       slots: [10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34,37,38,39,40,41,42,43]
-  category:
-    rows: 6
-    categories:
-      2v8:
-
-
-
-
-
-
+      available-material: "LIME_STAINED_GLASS"
+      unavailable-material: "RED_STAINED_GLASS"
 
 # Old things lol
 bw-categories-menu:

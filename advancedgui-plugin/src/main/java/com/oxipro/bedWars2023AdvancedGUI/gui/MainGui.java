@@ -2,12 +2,14 @@ package com.oxipro.bedWars2023AdvancedGUI.gui;
 
 import com.oxipro.bedWars2023AdvancedGUI.api.ItemType;
 import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.VersionSupport;
+import com.oxipro.bedWars2023AdvancedGUI.api.text.placeholders.PrasePlaceholders;
 import com.oxipro.bedWars2023AdvancedGUI.util.ArenaItem;
 import com.oxipro.bedWars2023AdvancedGUI.util.RejoinItem;
 import com.tomkeuper.bedwars.proxy.api.CachedArena;
 import com.tomkeuper.bedwars.proxy.api.Language;
 import com.tomkeuper.bedwars.proxy.api.RemoteReJoin;
 import com.tomkeuper.bedwars.proxy.arenamanager.ArenaManager;
+import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -33,7 +35,7 @@ public class MainGui extends AbstractGui {
 
 
     public MainGui(GuiManager guiManager, Player player) {
-        super(guiManager, guiManager.getConfigurationManager().getConfig().getInt(GUI_MODE_ROWS), "BedWars");
+        super(guiManager, guiManager.getConfigurationManager().getConfig().getInt(GUI_MAIN_ROWS), new PrasePlaceholders(player, guiManager.getBwProxyService().getPlayerLanguage(player), guiManager.getLanguageManager()).prase(guiManager.getLanguageManager().getRawMsg(player, GUI_MAIN_TITLE)));
         this.player = player;
         this.rj = guiManager.resume().getReJoin(player);
         this.language = guiManager.getBwProxyService().getPlayerLanguage(player);
@@ -51,21 +53,33 @@ public class MainGui extends AbstractGui {
         int startSlot = config.getInt(GUI_MAIN_ARENAS_START_SLOT);
         int offset = 0;
 
-        for (int i = 0; i < config.getInt(GUI_MAIN_ARENAS_SLOTS_COUNTS); i++) {
 
+        List<?> slotList = config.getList(GUI_MAIN_ARENAS_SLOTS);
+        int size = slotList.size();
+
+        for (int i = 0; i < size; i++) {
             int index = offset + i;
             int slot = startSlot + i;
 
+            ItemStack itemToSet;
             if (index < items.size()) {
-                inventory.setItem(slot, items.get(index));
+                itemToSet = items.get(index);
             } else {
-                inventory.setItem(slot, new ArenaItem(null, config, guiManager.getBwProxyService(), guiManager.getLanguageManager(), player, versionSupport).createArenaItem());
+                itemToSet = new ArenaItem(
+                        null,
+                        config,
+                        guiManager.getBwProxyService(),
+                        guiManager.getLanguageManager(),
+                        player,
+                        versionSupport
+                ).createArenaItem();
             }
+
+            inventory.setItem(slot, itemToSet);
         }
     }
 
     protected void init() {
-
         itemActions.put(ItemType.QUICK_JOIN, (player, event) -> {
             if (guiManager.getBwProxyService().getBwproxy().getArenaUtil().joinRandomArena(player)) {
                 cancelRefreshArenas();
@@ -115,44 +129,48 @@ public class MainGui extends AbstractGui {
 
         if (config.getBoolean(GUI_MAIN_QUICK_JOIN_ENABLED)) {
             inventory.setItem(config.getInt(GUI_MAIN_QUICK_JOIN_SLOT),
-                    versionSupport.itemBuilder(config.getString(GUI_MAIN_QUICK_JOIN_MATERIAL))
-                            .name(guiManager.getRawMsg(player, GUI_QUICK_JOIN_NAME))
-                            .lore(guiManager.getRawMsgList(player, GUI_QUICK_JOIN_LORE))
+                    versionSupport.itemBuilder(config.getString(GUI_MAIN_QUICK_JOIN_MATERIAL), guiManager.getLanguageManager())
+                            .setLanguage(language)
                             .setType(ItemType.QUICK_JOIN)
                             .player(player)
+                            .name(guiManager.getRawMsg(player, GUI_QUICK_JOIN_NAME))
+                            .lore(guiManager.getRawMsgList(player, GUI_QUICK_JOIN_LORE))
                             .build()
             );
         }
 
         if (config.getBoolean(GUI_MAIN_CATEGORIES_ENABLED)) {
             inventory.setItem(config.getInt(GUI_MAIN_CATEGORIES_SLOT),
-                    versionSupport.itemBuilder(config.getString(GUI_MAIN_CATEGORIES_MATERIAL))
-                            .name(guiManager.getRawMsg(player, GUI_CATEGORIES_NAME))
-                            .lore(guiManager.getRawMsgList(player, GUI_CATEGORIES_LORE))
+                    versionSupport.itemBuilder(config.getString(GUI_MAIN_CATEGORIES_MATERIAL), guiManager.getLanguageManager())
+                            .setLanguage(language)
                             .setType(ItemType.CATEGORIES_SELECTOR_OPENER)
                             .player(player)
+                            .name(guiManager.getRawMsg(player, GUI_CATEGORIES_NAME))
+                            .lore(guiManager.getRawMsgList(player, GUI_CATEGORIES_LORE))
                             .build()
             );
         }
 
         if (config.getBoolean(GUI_MAIN_HOTBAR_ENABLED)) {
             inventory.setItem(config.getInt(GUI_MAIN_HOTBAR_SLOT),
-                    versionSupport.itemBuilder(config.getString(GUI_MAIN_HOTBAR_MATERIAL))
-                            .name(guiManager.getRawMsg(player, GUI_HBM_NAME))
-                            .lore(guiManager.getRawMsgList(player, GUI_HBM_LORE))
+                    versionSupport.itemBuilder(config.getString(GUI_MAIN_HOTBAR_MATERIAL), guiManager.getLanguageManager())
+                            .setLanguage(language)
                             .setType(ItemType.HOTBAR_MANAGER_OPENER)
                             .player(player)
+                            .name(guiManager.getRawMsg(player, GUI_HBM_NAME))
+                            .lore(guiManager.getRawMsgList(player, GUI_HBM_LORE))
                             .build()
             );
         }
 
         if (config.getBoolean(GUI_MAIN_QUICK_BUY_ENABLED)) {
             inventory.setItem(config.getInt(GUI_MAIN_QUICK_BUY_SLOT),
-                    versionSupport.itemBuilder(config.getString(GUI_MAIN_QUICK_BUY_MATERIAL))
-                            .name(guiManager.getRawMsg(player, GUI_QUICK_BUY_NAME))
-                            .lore(guiManager.getRawMsgList(player, GUI_QUICK_BUY_LORE))
+                    versionSupport.itemBuilder(config.getString(GUI_MAIN_QUICK_BUY_MATERIAL), guiManager.getLanguageManager())
+                            .setLanguage(language)
                             .setType(ItemType.LOBBY_EDITOR_OPENER)
                             .player(player)
+                            .name(guiManager.getRawMsg(player, GUI_QUICK_BUY_NAME))
+                            .lore(guiManager.getRawMsgList(player, GUI_QUICK_BUY_LORE))
                             .build()
             );
         }
@@ -169,11 +187,11 @@ public class MainGui extends AbstractGui {
         }
     }
 
-    private boolean cancelRefreshArenas() {
+    public boolean cancelRefreshArenas() {
         if (!config.getBoolean(GUI_MAIN_ARENAS_REFRESH_ENABLED)) return false;
-        if (drawOTFArenasRunnable!= null) {
+        if (drawOTFArenasRunnable != null) {
             drawOTFArenasRunnable.cancel();
-            return false;
+            return true;
         }
         return false;
     }

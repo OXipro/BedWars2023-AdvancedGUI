@@ -58,6 +58,10 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+        <repository>
+            <id>bedwars2023-releases</id>
+            <url>https://repo.tomkeuper.com/repository/releases/</url>
+        </repository>
     </repositories>
     <dependencies>
         <dependency>
@@ -65,6 +69,13 @@
             <artifactId>spigot-api</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tomkeuper.bedwars</groupId>
+            <artifactId>BWProxy2023</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../libs/proxy-plugin-1.0.jar</systemPath>
         </dependency>
     </dependencies>
 

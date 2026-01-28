@@ -24,7 +24,7 @@ public class BWAGUICommand implements CommandExecutor {
             guiManager.openMainGui(player);
             return true;
         }
-        guiManager.openModeGui(player, guiManager.loadBwCategoryMenu().getCategory(args[0]));
+        guiManager.openModeGui(player, guiManager.getBwCategories().get(args[0]));
         return true;
     }
 }

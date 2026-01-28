@@ -3,6 +3,7 @@ package com.oxipro.version.support.v1_8_R3;
 import com.oxipro.bedWars2023AdvancedGUI.api.Support.PlatfromSupport.PlatformSupport;
 import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.ItemBuilder;
 import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.VersionSupport;
+import com.oxipro.bedWars2023AdvancedGUI.api.language.LanguageManager;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
@@ -21,8 +22,8 @@ public class v1_8_R3 extends VersionSupport {
     }
 
     @Override
-    public ItemBuilder itemBuilder(String material) {
-        return new com.oxipro.version.support.v1_8_R3.ItemBuilder(material, this);
+    public ItemBuilder itemBuilder(String material, LanguageManager languageManager) {
+        return new com.oxipro.version.support.v1_8_R3.ItemBuilder(material, this, languageManager);
     }
 
     @Override

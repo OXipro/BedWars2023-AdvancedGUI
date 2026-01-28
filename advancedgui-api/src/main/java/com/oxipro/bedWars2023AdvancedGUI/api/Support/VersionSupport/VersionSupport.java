@@ -1,6 +1,7 @@
 package com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport;
 
 import com.oxipro.bedWars2023AdvancedGUI.api.Support.PlatfromSupport.PlatformSupport;
+import com.oxipro.bedWars2023AdvancedGUI.api.language.LanguageManager;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
@@ -29,6 +30,6 @@ public abstract class VersionSupport {
 
     public abstract String getItemTag(ItemStack item, String key);
 
-    public abstract ItemBuilder itemBuilder(String material);
+    public abstract ItemBuilder itemBuilder(String material, LanguageManager languageManager);
 
 }

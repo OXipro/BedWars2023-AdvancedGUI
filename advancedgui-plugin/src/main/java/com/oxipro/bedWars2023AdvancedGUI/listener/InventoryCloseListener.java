@@ -1,7 +1,9 @@
 package com.oxipro.bedWars2023AdvancedGUI.listener;
 
+import com.oxipro.bedWars2023AdvancedGUI.Main;
 import com.oxipro.bedWars2023AdvancedGUI.gui.AbstractGui;
 import com.oxipro.bedWars2023AdvancedGUI.gui.GuiManager;
+import com.oxipro.bedWars2023AdvancedGUI.gui.MainGui;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,6 +21,12 @@ public class InventoryCloseListener implements Listener {
         if (!(event.getPlayer() instanceof Player)) return;
 
         if (!(event.getInventory().getHolder() instanceof AbstractGui)) {
+            return;
+        }
+
+        if (event.getInventory().getHolder() instanceof MainGui) {
+            MainGui gui = (MainGui) event.getInventory().getHolder();
+            gui.cancelRefreshArenas();
             return;
         }
 

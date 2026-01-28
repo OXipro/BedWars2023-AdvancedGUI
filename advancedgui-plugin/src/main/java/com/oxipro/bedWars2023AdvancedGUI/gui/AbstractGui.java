@@ -1,6 +1,5 @@
 package com.oxipro.bedWars2023AdvancedGUI.gui;
 
-import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategory;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;

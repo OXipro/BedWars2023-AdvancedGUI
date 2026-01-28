@@ -1,59 +1,150 @@
 addons:
   advanced-gui:
     gui:
-      quick-arenas:
-        default: # mandatory
-          name: "<aqua>Arena: %bw_arena_short_identifier%" # can use %arena_identifier%
+      main:
+        title: "Play Bedwars!"
+        quick-arenas:
+          default: # mandatory
+            name: "<aqua>Arena: %bw_arena_short_identifier%" # can use %arena_identifier%
+            lore:
+              - ""
+              - " <grey>Map:<white> %bw_arena_display_name%"
+              - " <grey>Category:<white> %bw_arena_group%"
+              - " <grey>Online:<white> %bw_arena_players%/%bw_arena_max_players%"
+              - " <grey>Status: %bw_arena_status%"
+              - ""
+              -
+              - "<b><color:#ffb300>Click to join!</color></b>"
+          waiting: [] # if set to [] will set default
+          starting: []  # if set to [] will set default
+          playing: [] # if set to [] will set default
+          restarting: # if set to [] will set default
+            name: "<aqua>Restarting: %bw_arena_short_identifier%" # can use %bw_arena_identifier%
+            lore:
+              - ""
+              - " <blue>This arena is restarting you can't join it"
+              - ""
+          no-arena: # mandatory
+            name: "<red>No arena available"
+            lore:
+              - ""
+              - " <red>There is no arena available to rejoin."
+              - ""
+        rejoin:
+          available:
+            name: <green>Rejoin Game
+            lore:
+            - <green>Rejoin Game
+            - "<yellow>Map: %bw_arena_display_name%"
+          unavailable:
+            name: <red>No game to rejoin
+            lore:
+            - <red>There is no game to rejoin
+        quick-join:
+          name: Quick Join!
           lore:
-          - ""
-          - " <grey>Map:<white> %bw_arena_display_name%"
-          - " <grey>Category:<white> %bw_arena_group%"
-          - " <grey>Online:<white> %bw_arena_players%/%bw_arena_max_players%"
-          - " <grey>Status: %bw_arena_status%"
-          - ""
-          -
-          - "<b><color:#ffb300>Click to join!</color></b>"
-        waiting: [] # if set to [] will set default
-        starting: []  # if set to [] will set default
-        playing: [] # if set to [] will set default
-        restarting: # if set to [] will set default
-          name: "<aqua>Restarting: %bw_arena_short_identifier%" # can use %bw_arena_identifier%
+          - <yellow>Quickly join the most ready to start game!
+        categories:
+          name: Categories
           lore:
-          - ""
-          - " <blue>this arena is restarting you can't join it"
-          - ""
-
-        no-arena: # mandatory
-          name: "<red>No arena available"
+          - <yellow>Chose the BedWars Category
+        hotbar-manager: # hot bar manager
+          name: HotBar manager
           lore:
-          - ""
-          - " <red>There is no arena available to rejoin."
-          - ""
-      rejoin:
-        available:
-          name: <green>Rejoin Game
+          - <yellow>Open HotBar Manager
+        quick-buy:
+          name: SoonTM
           lore:
-          - <green>Rejoin Game
-          - "<yellow>Map: %bw_arena_display_name%"
-        unavailable:
-          name: <red>No game to rejoin
+          - SOON tm
+      categories-selector:
+        title: "Select a BedWars Category"
+        categories:
+          1x8:
+            name: "<green>BedWars Solo - 1x8"
+            lore:
+              - "1 player in 8 teams"
+              - ""
+              - "<b><color:#ffb300>Click to join!</color></b>"
+          2x8:
+            name: "<green>BedWars Doubles - 2x8"
+            lore:
+              - "2 players in 8 teams"
+              - ""
+              - "<b><color:#ffb300>Click to join!</color></b>"
+          3x4:
+            name: "<green>BedWars Triples - 3x4"
+            lore:
+              - "3 players in 4 teams"
+              - ""
+              - "<b><color:#ffb300>Click to join!</color></b>"
+          4x4:
+            name: "<green>BedWars Squad - 4x4"
+            lore:
+              - "4 players in 4 teams"
+              - ""
+              - "<b><color:#ffb300>Click to join!</color></b>"
+          2x2:
+            name: "<green>BedWars Doubles Duels - 2x2"
+            lore:
+              - "2 players in 2 teams"
+              - ""
+              - "<b><color:#ffb300>Click to join!</color></b>"
+      category-menu:
+        title: "Selected Category: %bw_selected_category%"
+        rejoin:
+          available:
+            name: <green>Rejoin Game
+            lore:
+              - <green>Rejoin Game
+              - "<yellow>Map: %bw_arena_display_name%"
+          unavailable:
+            name: <red>No game to rejoin
+            lore:
+              - <red>There is no game to rejoin
+        quick-join:
+          name: Quick Join!
           lore:
-          - <red>There is no game to rejoin
-      quick-join:
-        name: Quick Join!
-        lore:
-        - <yellow>Quickly join the most ready to start game!
-      categories:
-        name: Categories
-        lore:
-        - <yellow>Chose the BedWars Category
-      hbm: # hot bar manager
-        name: HotBar manager
-        lore:
-        - <yellow>Open HotBar Manager
-      qb:
-        name: SoonTM
-        lore:
-        - SOON tm
+            - "<yellow>Quickly join the most ready to start game!"
+        categories:
+          name: Categories
+          lore:
+            - <yellow>Chose the BedWars Category
+        hotbar-manager: # hot bar manager
+          name: HotBar manager
+          lore:
+            - <yellow>Open HotBar Manager
+        quick-buy:
+          name: SoonTM
+          lore:
+            - "SOON tm"
+        map-selector:
+          name: "<green>Choose Map"
+          lore:
+            - ""
+            - " Pick which map you want to play!"
+            - ""
+            - "<b><color:#ffb300>Click to choose!</color></b>"
+      map-selector:
+        title: "Choose a map in %bw_selected_category%"
+        back-page:
+          name: "<green>Previous Page"
+          lore: []
+        next-page:
+          name: "<green>Previous Page"
+          lore: []
+        back:
+          name: "<green>Back to category"
+          lore: []
+        maps:
+          available:
+            name: "<green>%bw_map_display_name%"
+            lore:
+              - ""
+              - "Available Map selections: <green>soonTM"
+              - ""
+              - "<b><color:#ffb300>Click to join!</color></b>"
+          unavailable:
+            name: "<red>No map available"
+            lore: []
     messages:
       no-map-available-arena: <red>There are no maps available for this category

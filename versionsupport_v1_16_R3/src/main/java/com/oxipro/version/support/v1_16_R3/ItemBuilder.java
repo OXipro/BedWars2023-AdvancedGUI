@@ -1,8 +1,11 @@
 package com.oxipro.version.support.v1_16_R3;
 
 import com.oxipro.bedWars2023AdvancedGUI.api.ItemType;
-import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.ChatColor;
+import com.oxipro.bedWars2023AdvancedGUI.api.Support.PlatfromSupport.ItemMetaBuilder;
+import com.oxipro.bedWars2023AdvancedGUI.api.gui.category.BwCategory;
+import com.oxipro.bedWars2023AdvancedGUI.api.language.LanguageManager;
+import com.tomkeuper.bedwars.proxy.api.CachedArena;
+import com.tomkeuper.bedwars.proxy.api.Language;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -10,7 +13,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -21,16 +23,20 @@ public class ItemBuilder implements com.oxipro.bedWars2023AdvancedGUI.api.Suppor
     private Player player;
     private Boolean head = false;
     private v1_16_R3 v1_16_r3;
+    private LanguageManager languageManager;
 
-    private String category;
+
+    private BwCategory category;
     private ItemType type;
-    private String arena;
+    private CachedArena arena;
     private String base64;
     private boolean isHead;
     private String name;
     private List<String> lore;
+    private Language language;
 
-    public ItemBuilder(String input, v1_16_R3 v1_16_r3) {
+
+    public ItemBuilder(String input, v1_16_R3 v1_16_r3, LanguageManager languageManager) {
 
         Material material = Material.matchMaterial(input);
 
@@ -44,6 +50,7 @@ public class ItemBuilder implements com.oxipro.bedWars2023AdvancedGUI.api.Suppor
             material = Material.BARRIER;
         }
 
+        this.languageManager = languageManager;
         this.item = new ItemStack(material);
         this.meta = item.getItemMeta();
         this.v1_16_r3 = v1_16_r3;
@@ -57,23 +64,23 @@ public class ItemBuilder implements com.oxipro.bedWars2023AdvancedGUI.api.Suppor
 
     @Override
     public ItemBuilder name(String name) {
-        String parsed = player != null ? PlaceholderAPI.setPlaceholders(player, name) : name;
+//        String parsed = player != null ? PlaceholderAPI.setPlaceholders(player, name) : name;
 //        String colored = translate(parsed);
 //        meta.setDisplayName(colored);
-        this.name = parsed;
+        this.name = name;
         return this;
     }
 
     @Override
     public ItemBuilder lore(List<String> lore) {
         if (!lore.isEmpty()) {
-            List<String> lines = new ArrayList<>();
-            for (String line : lore) {
-                String parsed = player != null ? PlaceholderAPI.setPlaceholders(player, line) : line;
-                lines.add(parsed);
-            }
+//            List<String> lines = new ArrayList<>();
+//            for (String line : lore) {
+//                String parsed = player != null ? PlaceholderAPI.setPlaceholders(player, line) : line;
+//                lines.add(parsed);
+//            }
 //            meta.setLore(lines);
-            this.lore = lines;
+            this.lore = lore;
         }
         return this;
     }
@@ -94,14 +101,14 @@ public class ItemBuilder implements com.oxipro.bedWars2023AdvancedGUI.api.Suppor
     }
 
     @Override
-    public ItemBuilder setCategory(String value) {
+    public ItemBuilder setCategory(BwCategory bwCategory) {
 //        this.item = v1_16_r3.setItemTag(item, "agui.category" , value);
-        this.category = category;
+        this.category = bwCategory;
         return this;
     }
 
     @Override
-    public ItemBuilder setArena(String value) {
+    public ItemBuilder setArena(CachedArena arena) {
 //        this.item = v1_16_r3.setItemTag(item, "agui.arena" , value);
         this.arena = arena;
         return this;
@@ -115,26 +122,50 @@ public class ItemBuilder implements com.oxipro.bedWars2023AdvancedGUI.api.Suppor
     }
 
     @Override
+    public ItemBuilder setLanguage(Language language) {
+        this.language = language;
+        return this;
+    }
+
+
+    @Override
     public ItemStack build() {
         item.setItemMeta(meta);
 
         if (isHead && base64 != null) {
             item = v1_16_r3.playerHead(this.item, base64);
         }
-        if (name != null) {
-            v1_16_r3.getPlatformSupport().applyDisplayName(item, name);
+        ItemMetaBuilder itemMetaBuilder = v1_16_r3.getPlatformSupport().getItemMetaBuilder(item, languageManager);
+
+        if (language != null) {
+            itemMetaBuilder.setLanguage(language);
         }
-        if (lore != null) {
-            v1_16_r3.getPlatformSupport().applyLore(item, lore);
+        if (player != null) {
+            itemMetaBuilder.setPlayer(player);
+        }
+        if (arena != null) {
+            itemMetaBuilder.setArena(arena);
         }
         if (category != null) {
-            item = v1_16_r3.setItemTag(item, "agui.category", category);
+            itemMetaBuilder.setCategory(category);
+        }
+
+        if (name != null) {
+            itemMetaBuilder.setDisplayName(name);
+        }
+        if (lore != null) {
+            itemMetaBuilder.setLore(lore);
+        }
+
+        item = itemMetaBuilder.build();
+        if (category != null) {
+            item = v1_16_r3.setItemTag(item, "agui.category", category.getKey());
         }
         if (type != null) {
             item = v1_16_r3.setItemTag(item, "agui.type", type.getId());
         }
         if (arena != null) {
-            item = v1_16_r3.setItemTag(item, "agui.arena", arena);
+            item = v1_16_r3.setItemTag(item, "agui.arena", arena.getRemoteIdentifier());
         }
         return item;
     }

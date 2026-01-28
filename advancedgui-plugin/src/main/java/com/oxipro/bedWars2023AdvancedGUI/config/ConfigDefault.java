@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import static com.oxipro.bedWars2023AdvancedGUI.config.ConfigPaths.*;
 
@@ -22,74 +23,145 @@ public class ConfigDefault {
         file = new File(Bukkit.getPluginManager().getPlugin("BWProxy2023").getDataFolder().getPath() + "/Addons/AdvancedGUI/", "config.yml");
         c = YamlConfiguration.loadConfiguration(file);
 
-        c.addDefault(GUI_MAIN_ROWS, 4);
+        final String newfile = c.getString("gui.main");
+
+// ---------------- MAIN GUI ----------------
+        c.addDefault(ConfigPaths.GUI_MAIN_ROWS, 4);
+
+// quick-arenas
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_REFRESH_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_REFRESH_DELAY, 40L);
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_START_SLOT, 12);
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_SLOTS, Arrays.asList(12,13,14,15,16));
+
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_SHOW_WAITING, true);
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_SHOW_STARTING, true);
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_SHOW_RESTARTING, false);
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_SHOW_PLAYING, false);
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_SHOW_FULL, false);
+
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_MATERIAL_WAITING, "YELLOW_STAINED_GLASS");
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_MATERIAL_STARTING, "LIME_STAINED_GLASS");
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_MATERIAL_PLAYING, "LIGHT_BLUE_STAINED_GLASS");
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_MATERIAL_RESTARTING, "BLUE_STAINED_GLASS");
+        c.addDefault(ConfigPaths.GUI_MAIN_ARENAS_MATERIAL_NO_ARENA, "BARRIER");
+
+// rejoin
+        c.addDefault(ConfigPaths.GUI_MAIN_REJOIN_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_MAIN_REJOIN_SLOT, 35);
+        c.addDefault(ConfigPaths.GUI_MAIN_REJOIN_MATERIAL_AVAILABLE, "ENDER_PEARL");
+        c.addDefault(ConfigPaths.GUI_MAIN_REJOIN_MATERIAL_UNAVAILABLE, "BARRIER");
+
+// quick-join
+        c.addDefault(ConfigPaths.GUI_MAIN_QUICK_JOIN_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_MAIN_QUICK_JOIN_SLOT, 10);
+        c.addDefault(ConfigPaths.GUI_MAIN_QUICK_JOIN_MATERIAL, "NETHER_STAR");
+
+// categories
+        c.addDefault(ConfigPaths.GUI_MAIN_CATEGORIES_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_MAIN_CATEGORIES_SLOT, 27);
+        c.addDefault(ConfigPaths.GUI_MAIN_CATEGORIES_MATERIAL, "CHEST");
+
+// hotbar manager
+        c.addDefault(ConfigPaths.GUI_MAIN_HOTBAR_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_MAIN_HOTBAR_SLOT, 28);
+        c.addDefault(ConfigPaths.GUI_MAIN_HOTBAR_MATERIAL, "BLAZE_ROD");
+
+// quick-buy
+        c.addDefault(ConfigPaths.GUI_MAIN_QUICK_BUY_ENABLED, false);
+        c.addDefault(ConfigPaths.GUI_MAIN_QUICK_BUY_SLOT, 29);
+        c.addDefault(ConfigPaths.GUI_MAIN_QUICK_BUY_MATERIAL, "EMERALD");
 
 
-        c.addDefault(GUI_MAIN_ARENAS_REFRESH_DELAY, 40L);
-        c.addDefault(GUI_MAIN_ARENAS_REFRESH_ENABLED, true);
-        c.addDefault(GUI_MAIN_ARENAS_START_SLOT, 12);
-        c.addDefault(GUI_MAIN_ARENAS_SLOTS_COUNTS, 5);
-        c.addDefault(GUI_MAIN_ARENAS_SHOW_FULL, false);
-        c.addDefault(GUI_MAIN_ARENAS_SHOW_WAITING, true);
-        c.addDefault(GUI_MAIN_ARENAS_SHOW_STARTING, true);
-        c.addDefault(GUI_MAIN_ARENAS_SHOW_RESTARTING, false);
-        c.addDefault(GUI_MAIN_ARENAS_SHOW_PLAYING, false);
-        c.addDefault(GUI_MAIN_ARENAS_MATERIAL_WAITING, "YELLOW_STAINED_GLASS");
-        c.addDefault(GUI_MAIN_ARENAS_MATERIAL_STARTING, "LIME_STAINED_GLASS");
-        c.addDefault(GUI_MAIN_ARENAS_MATERIAL_PLAYING, "LIGHT_BLUE_STAINED_GLASS");
-        c.addDefault(GUI_MAIN_ARENAS_MATERIAL_RESTARTING, "BLUE_STAINED_GLASS");
-        c.addDefault(GUI_MAIN_ARENAS_MATERIAL_NO_ARENA, "BARRIER");
+// ---------------- CATEGORIES SELECTOR ----------------
+        c.addDefault(ConfigPaths.GUI_CATEGORIES_SELECTOR_ROWS, 3);
+
+        if (newfile == null) {
+            String base = ConfigPaths.GUI_CATEGORIES_SELECTOR_CATEGORIES;
+
+            c.addDefault(base + "1x8." + ConfigPaths.GUI_CATEGORIES_SELECTOR_SLOT, 11);
+            c.addDefault(base + "1x8." + ConfigPaths.GUI_CATEGORIES_SELECTOR_ITEM_MATERIAL, "CHEST");
+            c.addDefault(base + "1x8." + ConfigPaths.GUI_CATEGORIES_SELECTOR_ITEM_AMOUNT, 1);
+
+            c.addDefault(base + "2x8." + ConfigPaths.GUI_CATEGORIES_SELECTOR_SLOT, 12);
+            c.addDefault(base + "2x8." + ConfigPaths.GUI_CATEGORIES_SELECTOR_ITEM_MATERIAL, "CHEST");
+            c.addDefault(base + "2x8." + ConfigPaths.GUI_CATEGORIES_SELECTOR_ITEM_AMOUNT, 1);
+
+            c.addDefault(base + "3x4." + ConfigPaths.GUI_CATEGORIES_SELECTOR_SLOT, 13);
+            c.addDefault(base + "3x4." + ConfigPaths.GUI_CATEGORIES_SELECTOR_ITEM_MATERIAL, "CHEST");
+            c.addDefault(base + "3x4." + ConfigPaths.GUI_CATEGORIES_SELECTOR_ITEM_AMOUNT, 1);
+
+            c.addDefault(base + "4x4." + ConfigPaths.GUI_CATEGORIES_SELECTOR_SLOT, 14);
+            c.addDefault(base + "4x4." + ConfigPaths.GUI_CATEGORIES_SELECTOR_ITEM_MATERIAL, "CHEST");
+            c.addDefault(base + "4x4." + ConfigPaths.GUI_CATEGORIES_SELECTOR_ITEM_AMOUNT, 1);
+
+            c.addDefault(base + "2x2." + ConfigPaths.GUI_CATEGORIES_SELECTOR_SLOT, 15);
+            c.addDefault(base + "2x2." + ConfigPaths.GUI_CATEGORIES_SELECTOR_ITEM_MATERIAL, "CHEST");
+            c.addDefault(base + "2x2." + ConfigPaths.GUI_CATEGORIES_SELECTOR_ITEM_AMOUNT, 1);
+        }
 
 
-        c.addDefault(GUI_MAIN_REJOIN_ENABLED, true);
-        c.addDefault(GUI_MAIN_REJOIN_SLOT, 35);
-        c.addDefault(GUI_MAIN_REJOIN_MATERIAL_AVAILABLE, "ENDER_PEARL");
-        c.addDefault(GUI_MAIN_REJOIN_MATERIAL_UNAVAILABLE, "BARRIER");
+// ---------------- CATEGORY MENU ----------------
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_ROWS, 4);
 
-        c.addDefault(GUI_MAIN_QUICK_JOIN_ENABLED, true);
-        c.addDefault(GUI_MAIN_QUICK_JOIN_SLOT, 10);
-        c.addDefault(GUI_MAIN_QUICK_JOIN_MATERIAL, "NETHER_STAR");
+// rejoin
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_REJOIN_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_REJOIN_SLOT, 35);
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_REJOIN_MATERIAL_AVAILABLE, "ENDER_PEARL");
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_REJOIN_MATERIAL_UNAVAILABLE, "BARRIER");
 
-        c.addDefault(GUI_MAIN_CATEGORIES_ENABLED, true);
-        c.addDefault(GUI_MAIN_CATEGORIES_SLOT, 27);
-        c.addDefault(GUI_MAIN_CATEGORIES_MATERIAL, "CHEST");
+// quick-join
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_QUICK_JOIN_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_QUICK_JOIN_SLOT, 12);
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_QUICK_JOIN_MATERIAL, "NETHER_STAR");
 
-        c.addDefault(GUI_MAIN_HOTBAR_ENABLED, true);
-        c.addDefault(GUI_MAIN_HOTBAR_SLOT, 28);
-        c.addDefault(GUI_MAIN_HOTBAR_MATERIAL, "BLAZE_ROD");
+// categories
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_CATEGORIES_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_CATEGORIES_SLOT, 27);
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_CATEGORIES_MATERIAL, "CHEST");
 
-        c.addDefault(GUI_MAIN_QUICK_BUY_ENABLED, false);
-        c.addDefault(GUI_MAIN_QUICK_BUY_SLOT, 29);
-        c.addDefault(GUI_MAIN_QUICK_BUY_MATERIAL, "EMERALD");
+// hotbar manager
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_HOTBAR_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_HOTBAR_SLOT, 28);
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_HOTBAR_MATERIAL, "BLAZE_ROD");
 
-        // ---------------- other gui mode:
-        c.addDefault(GUI_MODE_ROWS, 4);
+// quick-buy
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_QUICK_BUY_ENABLED, false);
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_QUICK_BUY_SLOT, 29);
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_QUICK_BUY_MATERIAL, "EMERALD");
+
+// map-selector
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_MAP_SELECTOR_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_MAP_SELECTOR_SLOT, 14);
+        c.addDefault(ConfigPaths.GUI_CATEGORY_MENU_MAP_SELECTOR_MATERIAL, "MAP");
 
 
-        c.addDefault(GUI_MODE_MAP_SELECTOR_ENABLED, true);
-        c.addDefault(GUI_MODE_MAP_SELECTOR_SLOT, 14);
-        c.addDefault(GUI_MODE_MAP_SELECTOR_MATERIAL, "OAK_SIGN");
+// ---------------- MAP SELECTOR ----------------
+        c.addDefault(ConfigPaths.GUI_MAP_SELECTOR_ROWS, 6);
 
-        c.addDefault(GUI_MODE_REJOIN_ENABLED, true);
-        c.addDefault(GUI_MODE_REJOIN_SLOT, 35);
-        c.addDefault(GUI_MODE_REJOIN_MATERIAL_AVAILABLE, "ENDER_PEARL");
-        c.addDefault(GUI_MODE_REJOIN_MATERIAL_UNAVAILABLE, "BARRIER");
+// back-page
+        c.addDefault(ConfigPaths.GUI_MAP_SELECTOR_BACK_PAGE_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_MAP_SELECTOR_BACK_PAGE_SLOT, 18);
+        c.addDefault(ConfigPaths.GUI_MAP_SELECTOR_BACK_PAGE_MATERIAL, "ARROW");
 
-        c.addDefault(GUI_MODE_QUICK_JOIN_ENABLED, true);
-        c.addDefault(GUI_MODE_QUICK_JOIN_SLOT, 10);
-        c.addDefault(GUI_MODE_QUICK_JOIN_MATERIAL, "NETHER_STAR");
+// next-page
+        c.addDefault(ConfigPaths.GUI_MAP_SELECTOR_NEXT_PAGE_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_MAP_SELECTOR_NEXT_PAGE_SLOT, 26);
+        c.addDefault(ConfigPaths.GUI_MAP_SELECTOR_NEXT_PAGE_MATERIAL, "ARROW");
 
-        c.addDefault(GUI_MODE_CATEGORIES_ENABLED, true);
-        c.addDefault(GUI_MODE_CATEGORIES_SLOT, 27);
-        c.addDefault(GUI_MODE_CATEGORIES_MATERIAL, "CHEST");
+// back button
+        c.addDefault(ConfigPaths.GUI_MAP_SELECTOR_BACK_ENABLED, true);
+        c.addDefault(ConfigPaths.GUI_MAP_SELECTOR_BACK_SLOT, 49);
+        c.addDefault(ConfigPaths.GUI_MAP_SELECTOR_BACK_MATERIAL, "ARROW");
 
-        c.addDefault(GUI_MODE_HOTBAR_ENABLED, true);
-        c.addDefault(GUI_MODE_HOTBAR_SLOT, 28);
-        c.addDefault(GUI_MODE_HOTBAR_MATERIAL, "BLAZE_ROD");
+// maps slots
+        c.addDefault(ConfigPaths.GUI_MAP_SELECTOR_MAPS_SLOTS,
+                Arrays.asList(10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34,37,38,39,40,41,42,43)
+        );
 
-        c.addDefault(GUI_MODE_QUICK_BUY_ENABLED, false);
-        c.addDefault(GUI_MODE_QUICK_BUY_SLOT, 29);
-        c.addDefault(GUI_MODE_QUICK_BUY_MATERIAL, "EMERALD");
+        c.addDefault(ConfigPaths.GUI_MAP_SELECTOR_MAPS_AVAILABLE_MATERIAL, "LIME_STAINED_GLASS");
+        c.addDefault(ConfigPaths.GUI_MAP_SELECTOR_MAPS_UNAVAILABLE_MATERIAL, "RED_STAINED_GLASS");
 
 
 

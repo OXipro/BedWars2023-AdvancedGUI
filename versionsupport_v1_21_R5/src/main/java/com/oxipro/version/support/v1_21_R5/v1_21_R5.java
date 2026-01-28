@@ -1,6 +1,7 @@
 package com.oxipro.version.support.v1_21_R5;
 
 import com.oxipro.bedWars2023AdvancedGUI.api.Support.PlatfromSupport.PlatformSupport;
+import com.oxipro.bedWars2023AdvancedGUI.api.language.LanguageManager;
 import org.bukkit.NamespacedKey;
 import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.ItemBuilder;
 import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.VersionSupport;
@@ -20,8 +21,8 @@ public final class v1_21_R5 extends VersionSupport {
     }
 
     @Override
-    public ItemBuilder itemBuilder(String material) {
-        return new com.oxipro.version.support.v1_21_R5.ItemBuilder(material, this);
+    public ItemBuilder itemBuilder(String material, LanguageManager languageManager) {
+        return new com.oxipro.version.support.v1_21_R5.ItemBuilder(material, this, languageManager);
     }
 
     public ItemStack playerHead(ItemStack item, String url) {

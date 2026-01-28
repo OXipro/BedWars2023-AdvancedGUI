@@ -35,7 +35,6 @@ public final class Main extends JavaPlugin {
     private me.kiiya.hotbarmanager.api.HotbarManager hbm = null;
     private Plugin plugin;
     private static final String minecraftVersion = Bukkit.getServer().getBukkitVersion().split("-")[0];
-//    private static String nmsVersion = Bukkit.getServer().getClass().getName().split("\\.")[3];
     private static String nmsVersion;
     private static final String platform = Bukkit.getServer().getName();
     private VersionSupport versionSupport;
@@ -125,7 +124,7 @@ public final class Main extends JavaPlugin {
 
         BwProxyService bwProxyService = new BwProxyService(this, bwproxy);
         ConfigurationManager configManager = new ConfigurationManager(this);
-        LanguageManager languageManager = new LanguageManager(bwProxyService);
+        LanguageManager languageManager = new LanguageManager(this,bwProxyService);
         ArenaService arenaService = new ArenaService(this, bwProxyService, configManager.getConfig(), languageManager, versionSupport);
         CategoryService categoryService = new CategoryService(this);
         PlayerResumeService resumeService = new PlayerResumeService(this, bwproxy);

@@ -1,6 +1,5 @@
 package com.oxipro.bedWars2023AdvancedGUI.listener;
 
-import com.avaje.ebean.config.EncryptDeploy;
 import com.oxipro.bedWars2023AdvancedGUI.gui.*;
 import me.kiiya.hotbarmanager.HotbarManager;
 import org.bukkit.entity.Player;
@@ -20,19 +19,21 @@ public class InventoryClickListener implements Listener {
     public void onClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
         Player player = (Player) event.getWhoClicked();
-        if (guiManager.getHBMService().isHBMEnabled() && (guiManager.getOpenGui(player) != null)) {
-            String tag = HotbarManager.getInstance().getVersionSupport().getItemTag(event.getCurrentItem(), "hbm");
-            if (tag != null) {
-                if (tag.equals("back")) {
-                    AbstractGui gui = guiManager.getOpenGui(player);
-                    if (gui instanceof ModeGui) {
-                        ModeGui modeGui = (ModeGui) gui;
-                        guiManager.openModeGui(player, modeGui.getCategory());
-                    } else if (gui instanceof MainGui) {
-                        guiManager.openMainGui(player);
+        if (event.getCurrentItem() != null) {
+            if (guiManager.getHBMService().isHBMEnabled() && (guiManager.getOpenGui(player) != null)) {
+                String tag = HotbarManager.getInstance().getVersionSupport().getItemTag(event.getCurrentItem(), "hbm");
+                if (tag != null) {
+                    if (tag.equals("back")) {
+                        AbstractGui gui = guiManager.getOpenGui(player);
+                        if (gui instanceof CategoryMenuGui) {
+                            CategoryMenuGui categoryMenuGUI = (CategoryMenuGui) gui;
+                            guiManager.openModeGui(player, categoryMenuGUI.getCategory());
+                        } else if (gui instanceof MainGui) {
+                            guiManager.openMainGui(player);
+                        }
+                        guiManager.getLogger().info(tag);
+                        guiManager.getLogger().info(gui.toString());
                     }
-                    guiManager.getLogger().info(tag);
-                    guiManager.getLogger().info(gui.toString());
                 }
             }
         }

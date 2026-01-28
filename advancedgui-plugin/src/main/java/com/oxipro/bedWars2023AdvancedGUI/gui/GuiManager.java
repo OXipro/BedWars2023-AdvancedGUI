@@ -1,22 +1,16 @@
 package com.oxipro.bedWars2023AdvancedGUI.gui;
 
-import com.oxipro.bedWars2023AdvancedGUI.api.ItemType;
 import com.oxipro.bedWars2023AdvancedGUI.api.Support.VersionSupport.VersionSupport;
 import com.oxipro.bedWars2023AdvancedGUI.config.ConfigurationManager;
-import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategory;
-import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategoryMenu;
-import com.oxipro.bedWars2023AdvancedGUI.gui.BwCategory.BwCategoryMenuLoader;
+import com.oxipro.bedWars2023AdvancedGUI.api.gui.category.BwCategory;
 import com.oxipro.bedWars2023AdvancedGUI.language.LanguageManager;
 import com.oxipro.bedWars2023AdvancedGUI.service.*;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
-import java.util.function.BiConsumer;
 import java.util.logging.Logger;
 
 public class GuiManager {
@@ -26,7 +20,7 @@ public class GuiManager {
     private final CategoryService categoryService;
     private final PlayerResumeService resumeService;
     private final ConfigurationManager configurationManager;
-    private final BwCategoryMenu bwCategoryMenu;
+    private final Map<String, BwCategory> bwCategories;
     private final BwProxyService bwProxyService;
     private final HotbarManagerService hbms;
     private final LanguageManager languageManager;
@@ -51,13 +45,12 @@ public class GuiManager {
         this.arenaService = arenaService;
         this.categoryService = categoryService;
         this.configurationManager = configurationManager;
-        this.bwCategoryMenu = new BwCategoryMenuLoader(configurationManager.getConfig()).load();
         this.bwProxyService = bwProxyService;
         this.resumeService = resumeService;
         this.hbms = hbms;
         this.languageManager = languageManager;
         this.versionSupport = versionSupport;
-
+        this.bwCategories = new BwCategoryMenuLoader(configurationManager.getConfig(), languageManager).load();
     }
 
     public void openMainGui(Player player) {
@@ -65,11 +58,11 @@ public class GuiManager {
     }
 
     public void openCategoryGui(Player player) {
-        openGui(player, new CategoryGui(this));
+        openGui(player, new CategoriesSelectorGui(this, player));
     }
 
     public void openModeGui(Player player, BwCategory category) {
-        openGui(player, new ModeGui(this, category, player));
+        openGui(player, new CategoryMenuGui(this, category, player));
     }
 
     private void openGui(Player player, AbstractGui gui) {
@@ -111,7 +104,7 @@ public class GuiManager {
     }
 
     public void openMapSelectorGui(Player player, BwCategory category) {
-        openGui(player, new MapSelectorGui(this, category));
+        openGui(player, new MapSelectorGui(this, category, player));
     }
 
     public BwProxyService getBwProxyService() { return bwProxyService; }
@@ -122,8 +115,8 @@ public class GuiManager {
 
     public LanguageManager getLanguageManager() { return languageManager; }
 
-    public BwCategoryMenu loadBwCategoryMenu() {
-        return bwCategoryMenu;
+    public Map<String, BwCategory> getBwCategories() {
+        return bwCategories;
     }
 
     public Logger getLogger() { return plugin.getLogger(); }
