@@ -29,18 +29,12 @@ public class LanguageManager extends com.oxipro.bedWars2023AdvancedGUI.api.langu
     }
 
     public String getRawMsg(Player player, String path) {
-        plugin.getLogger().info(player.toString());
-        plugin.getLogger().info(path);
         String msg = bwproxys.getMsg(player, path);
-        plugin.getLogger().info(msg);
         return msg;
     }
 
     public List<String> getRawMsgList(Player player, String path) {
-        plugin.getLogger().info(player.toString());
-        plugin.getLogger().info(path);
         List<String> list = bwproxys.getBwproxy().getLanguageUtil().getList(player, path);
-        plugin.getLogger().info(list.toString());
         return list;
     }
 

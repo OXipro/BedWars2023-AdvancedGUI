@@ -50,9 +50,6 @@ public final class v1_21_R5 extends VersionSupport {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
-        getPlugin().getLogger().info(key);
-        getPlugin().getLogger().info(item.toString());
-
         PersistentDataContainer container = meta.getPersistentDataContainer();
         NamespacedKey nk = new NamespacedKey(plugin, key);
 

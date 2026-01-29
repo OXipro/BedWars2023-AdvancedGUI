@@ -31,8 +31,6 @@ public class InventoryClickListener implements Listener {
                         } else if (gui instanceof MainGui) {
                             guiManager.openMainGui(player);
                         }
-                        guiManager.getLogger().info(tag);
-                        guiManager.getLogger().info(gui.toString());
                     }
                 }
             }

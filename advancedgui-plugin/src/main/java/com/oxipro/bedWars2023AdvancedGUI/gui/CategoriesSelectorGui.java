@@ -43,7 +43,6 @@ public class CategoriesSelectorGui extends AbstractGui {
             if (material == null) {
                 material ="BARRIER";
             }
-            guiManager.getLogger().info(category.getKey());
             String languagePath = GUI_CATEGORIES_SELECTOR_CATEGORIES + category.getKey() + ".";
             ItemStack item = versionSupport.itemBuilder(material, guiManager.getLanguageManager())
                     .setLanguage(guiManager.getBwProxyService().getPlayerLanguage(player))
@@ -68,8 +67,6 @@ public class CategoriesSelectorGui extends AbstractGui {
         ItemStack item = event.getCurrentItem();
 
         if (ItemType.fromId(versionSupport.getItemTag(item, "agui.type")) == ItemType.CATEGORY) {
-            guiManager.getLogger().info("Item: " + item);
-            guiManager.getLogger().info("Category tag: " + versionSupport.getItemTag(item, "agui.category"));
 
             String aguiCategory = versionSupport.getItemTag(event.getCurrentItem(), "agui.category");
             if (aguiCategory == null) return;
@@ -80,9 +77,6 @@ public class CategoriesSelectorGui extends AbstractGui {
 
 
 //        String aguiCategory = versionSupport.getItemTag(inventory.getItem(slot), "agui.category");
-            guiManager.getLogger().info(String.valueOf(slot));
-            guiManager.getLogger().info(event.getCurrentItem().toString());
-            guiManager.getLogger().info(aguiCategory);
 //        BwCategory category = categoryMenu.getCategory(aguiCategory);
             guiManager.openModeGui((Player) event.getWhoClicked(), category);
         }
