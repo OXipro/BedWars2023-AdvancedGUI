@@ -27,7 +27,7 @@ It adds a clean and intuitive GUI that allows players to navigate easily between
 | BedWars2023              | ❌ No (maybe in future)                                                            |
 | HotbarManager (Kiiya)    | ✅ Optional integration                                                            |
 | Lobby Editor (ItzSuolis) | ~ Not supported currently but planning to do it <br/>(I don't have the plugin so) |
-| PlacehoderAPI            | ✅ Yes (inside the language(s) file)                                               |
+| PlaceholderAPI           | ✅ Yes (inside the language(s) file)                                               |
 
 ---
 
