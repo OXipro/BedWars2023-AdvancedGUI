@@ -29,6 +29,5 @@ public interface ItemBuilder {
 
     ItemBuilder setLanguage(Language language);
 
-
     ItemStack build();
 }

@@ -48,6 +48,7 @@ public class PrasePlaceholders {
         String result = input;
         if (arena != null) {
             String arenaIdentifier = arena.getRemoteIdentifier();
+            result = result.replace("%bw_map_display_name%", arena.getDisplayName(language));
             result = result.replace("%bw_arena_display_name%", arena.getDisplayName(language));
             result = result.replace("%bw_arena_identifier%", arenaIdentifier);
             result = result.replace("%bw_arena_short_identifier%", arenaIdentifier.substring(arenaIdentifier.indexOf('d') + 1));

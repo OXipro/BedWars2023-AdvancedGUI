@@ -90,7 +90,7 @@ public class ItemMetaBuilder extends com.oxipro.bedWars2023AdvancedGUI.api.Suppo
 
         List<Component> lore = new ArrayList<>(input.size());
         for (String line : input) {
-            lore.add(convert("<reset>" + line).decoration(TextDecoration.ITALIC, false));
+            lore.add(convert("<white>" + line).decoration(TextDecoration.ITALIC, false));
         }
 
         meta.lore(lore);

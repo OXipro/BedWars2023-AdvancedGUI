@@ -29,9 +29,9 @@ jobs:
           mvn clean verify \
             -B \
             --no-transfer-progress \
-            -DskipTests=false     # mets true si tu veux skipper les tests
+            -DskipTests=false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Show final plugin jar (just for info)
-        run: ls -lh advancedgui-plugin/target/*.jar || echo "Aucun jar trouvé (peut-être échec compilation ?)"
+        run: ls -lh advancedgui-plugin/target/*.jar || echo "no jar"

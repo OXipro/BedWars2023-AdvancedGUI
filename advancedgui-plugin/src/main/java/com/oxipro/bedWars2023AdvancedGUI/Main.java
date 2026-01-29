@@ -21,8 +21,9 @@ import com.oxipro.version.support.v1_20_R4.v1_20_R4;
 import com.oxipro.version.support.v1_21_R5.v1_21_R5;
 import com.tomkeuper.bedwars.proxy.BedWarsProxy;
 import com.tomkeuper.bedwars.proxy.api.BedWars;
-import com.tomkeuper.bedwars.proxy.libs.bukkit.Metrics;
 import me.kiiya.hotbarmanager.HotbarManager;
+import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicePriority;
@@ -81,6 +82,7 @@ public final class Main extends JavaPlugin {
             case "1.18.2":
                 versionSupport = new v1_18_R2(plugin, nmsVersion, platformSupport);
                 break;
+            case "1.20.4":
             case "1.20.6":
                 versionSupport = new v1_20_R4(plugin, nmsVersion, platformSupport);
                 break;
@@ -162,7 +164,20 @@ public final class Main extends JavaPlugin {
                 ServicePriority.Normal
         );
 
-        new Metrics(this, 28757);
+        org.bstats.bukkit.Metrics metrics = new Metrics(this, 28757);
+
+        metrics.addCustomChart(new SimplePie("plugin_version", () -> {
+            return plugin.getDescription().getVersion().toString();
+        }));
+
+        metrics.addCustomChart(new SimplePie("nms_version", () -> {
+            return versionSupport.getName();
+        }));
+
+        metrics.addCustomChart(new SimplePie("hbm_present", () -> {
+            return hbmService.isHBMEnabled().toString();
+        }));
+
     }
 
     @Override
