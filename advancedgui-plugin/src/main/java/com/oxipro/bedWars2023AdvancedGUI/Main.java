@@ -10,6 +10,7 @@ import com.oxipro.bedWars2023AdvancedGUI.language.LanguageManager;
 import com.oxipro.bedWars2023AdvancedGUI.listener.InventoryClickListener;
 import com.oxipro.bedWars2023AdvancedGUI.listener.InventoryCloseListener;
 import com.oxipro.bedWars2023AdvancedGUI.service.*;
+import com.oxipro.bedWars2023AdvancedGUI.support.bw2023.BW2023Proxy;
 import com.oxipro.platform.support.legacy.legacy;
 import com.oxipro.platform.support.modern.paper.paperModern;
 import com.oxipro.version.support.v1_8_R3.v1_8_R3;
@@ -101,9 +102,10 @@ public final class Main extends JavaPlugin {
         if (bedWarsPlugin != null && bedWarsPlugin.isEnabled()) {
             try {
                 bwproxy = BedWarsProxy.getAPI();
+                new BW2023Proxy(plugin, bwproxy);
                 getLogger().info("Bwproxy2023 OK.");
             } catch (Throwable t) {
-                getLogger().severe("error with bwproxy2023 api disabling feature.");
+                getLogger().severe("error with bwproxy2023 api disabling addon.");
                 Bukkit.getPluginManager().disablePlugin(plugin);
                 return;
             }
