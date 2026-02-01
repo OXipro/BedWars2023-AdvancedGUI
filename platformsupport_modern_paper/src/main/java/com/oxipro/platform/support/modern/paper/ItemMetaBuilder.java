@@ -10,6 +10,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -21,6 +22,12 @@ public class ItemMetaBuilder extends com.oxipro.bedWars2023AdvancedGUI.api.Suppo
 
 
     private static final MiniMessage MINI = MiniMessage.miniMessage();
+    private static final LegacyComponentSerializer LEGACY =
+            LegacyComponentSerializer.builder()
+                    .character('&')
+                    .hexColors()
+                    .useUnusualXRepeatedCharacterHexFormat() // §x§F§F§0§0§0§0
+                    .build();
     private CachedArena arena;
     private Player player;
     private BwCategory bwCategory;
@@ -37,9 +44,17 @@ public class ItemMetaBuilder extends com.oxipro.bedWars2023AdvancedGUI.api.Suppo
     public Component convert(String input) {
         if (input == null || input.isEmpty()) return Component.empty();
 
-        input = new PrasePlaceholders(this.player, this.language, this.languageManager).setCategory(bwCategory).setArena(arena).prase(input);
+        input = new PrasePlaceholders(this.player, this.language, this.languageManager)
+                .setCategory(bwCategory)
+                .setArena(arena)
+                .prase(input);
 
-        return MINI.deserialize(input);
+        input = input.replace('§', '&');
+
+        Component component = MINI.deserialize(input);
+
+        String legacySerialized = LEGACY.serialize(component);
+        return LEGACY.deserialize(legacySerialized);
     }
 
     @Override
