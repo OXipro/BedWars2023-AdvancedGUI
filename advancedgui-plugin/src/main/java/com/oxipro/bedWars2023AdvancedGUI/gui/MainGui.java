@@ -108,8 +108,10 @@ public class MainGui extends AbstractGui {
             String arena = versionSupport.getItemTag(event.getCurrentItem(), "agui.arena");
             if (arena != null) {
                 CachedArena cachedArena = ArenaManager.getArenaByIdentifier(arena);
-                if (cachedArena.addPlayer(player, null)) {
-                    cancelRefreshArenas();
+                if (cachedArena != null) {
+                    if (cachedArena.addPlayer(player, null)) {
+                        cancelRefreshArenas();
+                    }
                 }
             }
         });
