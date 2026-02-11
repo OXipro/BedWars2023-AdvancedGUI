@@ -11,7 +11,7 @@
 
     <groupId>com.oxipro.bedWars2023AdvancedGUI</groupId>
   <artifactId>advancedgui-plugin</artifactId>
-  <version>v0.0.1</version>
+  <version>0.2.0</version>
   <packaging>jar</packaging>
 
   <name>advancedgui-plugin</name>
@@ -22,7 +22,7 @@
   </properties>
 
   <build>
-      <finalName>BedWars2023-AdvancedGUI</finalName>
+      <finalName>BedWars2023-AdvancedGUI-${project.version}</finalName>
       <defaultGoal>clean package</defaultGoal>
     <plugins>
         <plugin>
