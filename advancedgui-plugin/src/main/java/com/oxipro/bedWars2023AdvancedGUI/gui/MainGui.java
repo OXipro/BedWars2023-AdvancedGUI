@@ -93,7 +93,7 @@ public class MainGui extends AbstractGui {
 
         itemActions.put(ItemType.HOTBAR_MANAGER_OPENER, (player, event) -> {
             guiManager.markIgnoreClose(player);
-            guiManager.getHBMService().getHbmAPI().getMenuUtil().openCategoryMenu(player);
+            guiManager.getHBMService().getHbmAPI().getMenuUtil().openHotbarMenu(player);
             cancelRefreshArenas();
         });
 
